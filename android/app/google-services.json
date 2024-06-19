@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "450409678078",
+    "project_id": "satunadi-d5860",
+    "storage_bucket": "satunadi-d5860.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:450409678078:android:4ce4429bf14bd5152a51af",
+        "android_client_info": {
+          "package_name": "com.example.pkl_satunadi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMjQBoIAA_G7_4GkslQ0swllaHThfd8RE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

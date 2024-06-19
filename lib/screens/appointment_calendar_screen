@@ -1,0 +1,216 @@
+import 'package:pkl_satunadi/colors.dart';
+import 'package:flutter/material.dart';
+import 'package:pkl_satunadi/screens/detail_rsvp.dart';
+import 'package:pkl_satunadi/screens/jenis_pembayaran.dart';
+import 'package:pkl_satunadi/screens/resume_rsvp.dart';
+
+class AppointmentCalendarScreen extends StatefulWidget {
+  @override
+  _AppointmentCalendarScreenState createState() =>
+      _AppointmentCalendarScreenState();
+}
+
+class _AppointmentCalendarScreenState extends State<AppointmentCalendarScreen> {
+  DateTime selectedDate = DateTime.now();
+  int? _currentIndex;
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(1985),
+      lastDate: DateTime(2027),
+    );
+
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
+  void _confirmAppointment() {
+    // Add your logic for confirming the appointment
+    // You can use selectedDate variable here
+    print("Appointment Confirmed!");
+    print("Date: ${selectedDate.toLocal()}");
+  }
+
+  void _navigateToResumeRsvpPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ResumeRsvpPage(),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: MediaQuery.of(context).size.height / 2.1,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/doctor1.jpg"),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                ),
+                gradient: LinearGradient(
+                  colors: [
+                    pColor.withOpacity(0.9),
+                    pColor.withOpacity(0),
+                    pColor.withOpacity(0),
+                  ],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                ),
+              ),
+              child: Container(),
+            ),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: pColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Dr. John Doe",
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        fontFamily: 'YourCustomFont', // Set your custom font
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () => _selectDate(context),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: pColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      "Pilih tanggal",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'Tanggal yang dipilih',
+                  style: TextStyle(fontSize: 20),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  '${selectedDate.toLocal()}'.split(' ')[0],
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            sliver: SliverGrid(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return InkWell(
+                    onTap: () {
+                      setState(() {
+                        _currentIndex = index;
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color:
+                            _currentIndex == index ? Colors.blue : Colors.grey,
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        '${index + 9}:00 ${index + 9 > 11 ? "PM" : "AM"}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: _currentIndex == index
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                childCount: 9,
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 40),
+              child: ElevatedButton(
+                onPressed: () {
+                  _confirmAppointment();
+                  _navigateToResumeRsvpPage();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: pColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                    "Buat Perjanjian",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
