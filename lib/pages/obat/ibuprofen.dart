@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pkl_satunadi/pages/obat/dashboard_obat.dart';
 
-class AcarboseScreen extends StatefulWidget {
-  const AcarboseScreen({Key? key}) : super(key: key);
+class IbuprofenScreen extends StatefulWidget {
+  const IbuprofenScreen({Key? key}) : super(key: key);
 
   @override
-  State<AcarboseScreen> createState() => _AcarboseScreenState();
+  State<IbuprofenScreen> createState() => _IbuprofenScreenState();
 }
 
-class _AcarboseScreenState extends State<AcarboseScreen> {
+class _IbuprofenScreenState extends State<IbuprofenScreen> {
   int _currentIndex = 0;
 
   @override
@@ -58,7 +58,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             //Nama Obat
             children: [
               Text(
-                "Acarbose",
+                "Ibuprofen",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 48,
@@ -91,7 +91,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             ),
             //Field Deskripsi Obat
             child: const Text(
-              "Acarbose atau akarbose adalah obat golongan antidiabetes. Obat ini bekerja dengan cara memperlambat pemecahan karbohidrat dalam makan menjadi gula, sehingga kadar gula darah tidak naik drastis setelah makan.\n\nAcarbose digunakan untuk mengobati diabetes tipe 2, yaitu kondisi di mana tubuh tidak dapat menggunakan insulin secara normal sehingga menyebabkan kenaikan gula darah. ",
+              "Ibuprofen adalah obat pereda nyeri dan penurun demam. Obat ini bisa meredakan nyeri haid, sakit kepala, migrain, sakit gigi, sakit pinggang, nyeri terkilir, atau demam saat flu maupun pilek. Ibuprofen juga memiliki efek antiperadangan sehingga bisa digunakan untuk mengatasi gejala radang sendi. Ibuprofen menghambat enzim yang membentuk prostaglandin saat jaringan tubuh mengalami kerusakan atau cedera. ",
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontFamily: 'Nunito-Regular',
@@ -193,7 +193,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Aturan Pakai
                       child: Text(
-                        'Dosis awal acarbose untuk orang dewasa adalah 25–50 mg 3 kali sehari. Jika diperlukan, dosis dapat ditingkatkan menjadi 100–200 mg 3 kali sehari setelah 4–8 minggu.',
+                        'Jangan menggunakan ibuprofen jika memiliki alergi terhadap obat ini. Jika ragu, temui dokter dan beri tahu tentang riwayat alergi yang dimiliki. ',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,

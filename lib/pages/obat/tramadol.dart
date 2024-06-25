@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pkl_satunadi/pages/obat/dashboard_obat.dart';
 
-class AcarboseScreen extends StatefulWidget {
-  const AcarboseScreen({Key? key}) : super(key: key);
+class TramadolScreen extends StatefulWidget {
+  const TramadolScreen({Key? key}) : super(key: key);
 
   @override
-  State<AcarboseScreen> createState() => _AcarboseScreenState();
+  State<TramadolScreen> createState() => _TramadolScreenState();
 }
 
-class _AcarboseScreenState extends State<AcarboseScreen> {
+class _TramadolScreenState extends State<TramadolScreen> {
   int _currentIndex = 0;
 
   @override
@@ -58,7 +58,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             //Nama Obat
             children: [
               Text(
-                "Acarbose",
+                "Tramadol",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 48,
@@ -91,7 +91,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             ),
             //Field Deskripsi Obat
             child: const Text(
-              "Acarbose atau akarbose adalah obat golongan antidiabetes. Obat ini bekerja dengan cara memperlambat pemecahan karbohidrat dalam makan menjadi gula, sehingga kadar gula darah tidak naik drastis setelah makan.\n\nAcarbose digunakan untuk mengobati diabetes tipe 2, yaitu kondisi di mana tubuh tidak dapat menggunakan insulin secara normal sehingga menyebabkan kenaikan gula darah. ",
+              "Tramadol adalah obat untuk meredakan nyeri sedang hingga berat, seperti nyeri pascaoperasi. Obat ini hanya boleh digunakan sesuai dengan anjuran dokter dan tidak ditujukan untuk penggunaan jangka panjang. Tramadol termasuk dalam golongan opioid. Obat ini bekerja dengan menghambat penghantaran sinyal nyeri di sistem saraf pusat. Cara kerja ini akan mengurangi nyeri yang dirasakan oleh tubuh.",
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontFamily: 'Nunito-Regular',
@@ -193,7 +193,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Aturan Pakai
                       child: Text(
-                        'Dosis awal acarbose untuk orang dewasa adalah 25–50 mg 3 kali sehari. Jika diperlukan, dosis dapat ditingkatkan menjadi 100–200 mg 3 kali sehari setelah 4–8 minggu.',
+                        'Dewasa dan anak usia ≥12: 50–100 mg, setiap 4–6 jam. Dosis maksimal 400 mg per hari. Lansia: Dosis dimulai dari yang paling rendah, lalu disesuaikan dengan kondisi dan respons pasien terhadap pengobatan. ',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pkl_satunadi/pages/obat/dashboard_obat.dart';
 
-class AcarboseScreen extends StatefulWidget {
-  const AcarboseScreen({Key? key}) : super(key: key);
+class UltrafluScreen extends StatefulWidget {
+  const UltrafluScreen({Key? key}) : super(key: key);
 
   @override
-  State<AcarboseScreen> createState() => _AcarboseScreenState();
+  State<UltrafluScreen> createState() => _UltrafluScreenState();
 }
 
-class _AcarboseScreenState extends State<AcarboseScreen> {
+class _UltrafluScreenState extends State<UltrafluScreen> {
   int _currentIndex = 0;
 
   @override
@@ -58,7 +58,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             //Nama Obat
             children: [
               Text(
-                "Acarbose",
+                "Ultraflu",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 48,
@@ -91,7 +91,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             ),
             //Field Deskripsi Obat
             child: const Text(
-              "Acarbose atau akarbose adalah obat golongan antidiabetes. Obat ini bekerja dengan cara memperlambat pemecahan karbohidrat dalam makan menjadi gula, sehingga kadar gula darah tidak naik drastis setelah makan.\n\nAcarbose digunakan untuk mengobati diabetes tipe 2, yaitu kondisi di mana tubuh tidak dapat menggunakan insulin secara normal sehingga menyebabkan kenaikan gula darah. ",
+              "Ultraflu adalah obat yang bermanfaat untuk meringankan gejala batuk pilek atau flu, seperti demam, sakit kepala, hidung tersumbat, bersin-bersin, serta batuk. Obat ini tersedia dalam tiga varian, yaitu Ultraflu, Ultraflu PE, dan Ultraflu Extra. Ultraflu memiliki kandungan utama paracetamol. Paracetamol bekerja langsung pada pusat pengaturan nyeri dan suhu yang berada di otak sehingga efektif untuk menurunkan demam dan meredakan nyeri. ",
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontFamily: 'Nunito-Regular',
@@ -128,7 +128,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Bentuk Obat
                       child: Text(
-                        'Tablet',
+                        'Kaplet',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,
@@ -193,7 +193,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Aturan Pakai
                       child: Text(
-                        'Dosis awal acarbose untuk orang dewasa adalah 25–50 mg 3 kali sehari. Jika diperlukan, dosis dapat ditingkatkan menjadi 100–200 mg 3 kali sehari setelah 4–8 minggu.',
+                        'Dewasa dan anak usia >12 tahun: 1 kaplet, 3 kali sehari. Obat ini hanya boleh digunakan jika besarnya manfaat yang diharapkan melebihi besarnya risiko terhadap janin.',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,

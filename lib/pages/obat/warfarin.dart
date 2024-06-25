@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pkl_satunadi/pages/obat/dashboard_obat.dart';
 
-class AcarboseScreen extends StatefulWidget {
-  const AcarboseScreen({Key? key}) : super(key: key);
+class WarfarinfilScreen extends StatefulWidget {
+  const WarfarinfilScreen({Key? key}) : super(key: key);
 
   @override
-  State<AcarboseScreen> createState() => _AcarboseScreenState();
+  State<WarfarinfilScreen> createState() => _WarfarinScreenState();
 }
 
-class _AcarboseScreenState extends State<AcarboseScreen> {
+class _WarfarinScreenState extends State<WarfarinfilScreen> {
   int _currentIndex = 0;
 
   @override
@@ -58,7 +58,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             //Nama Obat
             children: [
               Text(
-                "Acarbose",
+                "Warfarin",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 48,
@@ -91,7 +91,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             ),
             //Field Deskripsi Obat
             child: const Text(
-              "Acarbose atau akarbose adalah obat golongan antidiabetes. Obat ini bekerja dengan cara memperlambat pemecahan karbohidrat dalam makan menjadi gula, sehingga kadar gula darah tidak naik drastis setelah makan.\n\nAcarbose digunakan untuk mengobati diabetes tipe 2, yaitu kondisi di mana tubuh tidak dapat menggunakan insulin secara normal sehingga menyebabkan kenaikan gula darah. ",
+              "Warfarin bermanfaat untuk mencegah atau mengatasi bekuan darah yang bisa menyebabkan sumbatan pada pembuluh darah. Obat ini harus dikonsumsi secara rutin dan dalam pengawasan dokter. Warfarin bekerja dengan menghambat kerja vitamin K, yang merupakan salah satu faktor penting dalam proses pembekuan darah. Obat ini digunakan dalam pengobatan emboli paru, stroke ringan (transient ischemic attack/TIA).",
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontFamily: 'Nunito-Regular',
@@ -193,7 +193,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Aturan Pakai
                       child: Text(
-                        'Dosis awal acarbose untuk orang dewasa adalah 25–50 mg 3 kali sehari. Jika diperlukan, dosis dapat ditingkatkan menjadi 100–200 mg 3 kali sehari setelah 4–8 minggu.',
+                        'Dosis awal warfarin adalah 5–10 mg per hari, selama 1–2 hari pertama. Dosis perawatan 3–9 mg per hari, tergantung hasil tes darah saat evaluasi rutin.',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,

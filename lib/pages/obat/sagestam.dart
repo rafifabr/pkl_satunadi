@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pkl_satunadi/pages/obat/dashboard_obat.dart';
 
-class AcarboseScreen extends StatefulWidget {
-  const AcarboseScreen({Key? key}) : super(key: key);
+class SagestamScreen extends StatefulWidget {
+  const SagestamScreen({Key? key}) : super(key: key);
 
   @override
-  State<AcarboseScreen> createState() => _AcarboseScreenState();
+  State<SagestamScreen> createState() => _SagestamScreenState();
 }
 
-class _AcarboseScreenState extends State<AcarboseScreen> {
+class _SagestamScreenState extends State<SagestamScreen> {
   int _currentIndex = 0;
 
   @override
@@ -58,7 +58,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             //Nama Obat
             children: [
               Text(
-                "Acarbose",
+                "Sagestam",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 48,
@@ -91,7 +91,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             ),
             //Field Deskripsi Obat
             child: const Text(
-              "Acarbose atau akarbose adalah obat golongan antidiabetes. Obat ini bekerja dengan cara memperlambat pemecahan karbohidrat dalam makan menjadi gula, sehingga kadar gula darah tidak naik drastis setelah makan.\n\nAcarbose digunakan untuk mengobati diabetes tipe 2, yaitu kondisi di mana tubuh tidak dapat menggunakan insulin secara normal sehingga menyebabkan kenaikan gula darah. ",
+              "Sagestam adalah obat yang dapat digunakan untuk mengatasi infeksi kulit akibat bakteri, seperti impetigo, folikulitis, dan bisul. Obat berbentuk krim ini hanya boleh digunakan berdasarkan resep dokter. Sagestam mengandung bahan aktif gentamicin. Obat ini termasuk dalam golongan obat antibiotik topikal. Gentamicin mampu membunuh bakteri penyebab infeksi dengan cara menghambat dan menghentikan pertumbuhannya",
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontFamily: 'Nunito-Regular',
@@ -128,7 +128,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Bentuk Obat
                       child: Text(
-                        'Tablet',
+                        'Krim',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,
@@ -193,7 +193,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Aturan Pakai
                       child: Text(
-                        'Dosis awal acarbose untuk orang dewasa adalah 25–50 mg 3 kali sehari. Jika diperlukan, dosis dapat ditingkatkan menjadi 100–200 mg 3 kali sehari setelah 4–8 minggu.',
+                        'Untuk mengatasi infeksi kulit, oleskan Sagestam tipis-tipis 3–4 kali sehari di area kulit yang terinfeksi..',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pkl_satunadi/pages/obat/dashboard_obat.dart';
 
-class AcarboseScreen extends StatefulWidget {
-  const AcarboseScreen({Key? key}) : super(key: key);
+class NerobionScreen extends StatefulWidget {
+  const NerobionScreen({Key? key}) : super(key: key);
 
   @override
-  State<AcarboseScreen> createState() => _AcarboseScreenState();
+  State<NerobionScreen> createState() => _NerobionScreenState();
 }
 
-class _AcarboseScreenState extends State<AcarboseScreen> {
+class _NerobionScreenState extends State<NerobionScreen> {
   int _currentIndex = 0;
 
   @override
@@ -58,7 +58,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             //Nama Obat
             children: [
               Text(
-                "Acarbose",
+                "Neurobion",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 48,
@@ -91,7 +91,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             ),
             //Field Deskripsi Obat
             child: const Text(
-              "Acarbose atau akarbose adalah obat golongan antidiabetes. Obat ini bekerja dengan cara memperlambat pemecahan karbohidrat dalam makan menjadi gula, sehingga kadar gula darah tidak naik drastis setelah makan.\n\nAcarbose digunakan untuk mengobati diabetes tipe 2, yaitu kondisi di mana tubuh tidak dapat menggunakan insulin secara normal sehingga menyebabkan kenaikan gula darah. ",
+              "Neurobion adalah suplemen yang bermanfaat untuk mencegah dan mengobati gangguan saraf. Neurobion merupakan suplemen multivitamin yang mengandung vitamin B1, B6, dan B12 dalam dosis tinggi. Suplemen ini tersedia dalam bentuk tablet dan suntik. Neurobion dapat mencegah atau mengurangi gejala akibat gangguan saraf, seperti kesemutan, nyeri tajam yang menjalar, atau mati rasa.",
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontFamily: 'Nunito-Regular',
@@ -193,7 +193,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Aturan Pakai
                       child: Text(
-                        'Dosis awal acarbose untuk orang dewasa adalah 25–50 mg 3 kali sehari. Jika diperlukan, dosis dapat ditingkatkan menjadi 100–200 mg 3 kali sehari setelah 4–8 minggu.',
+                        'Neurobion tablet dapat dikonsumsi pada saat makan atau sesudah makan. Telan Neurobion tablet dengan utuh bersama sedikit air. ',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,

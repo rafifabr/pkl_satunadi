@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pkl_satunadi/pages/obat/dashboard_obat.dart';
 
-class AcarboseScreen extends StatefulWidget {
-  const AcarboseScreen({Key? key}) : super(key: key);
+class HufagrippScreen extends StatefulWidget {
+  const HufagrippScreen({Key? key}) : super(key: key);
 
   @override
-  State<AcarboseScreen> createState() => _AcarboseScreenState();
+  State<HufagrippScreen> createState() => _HufagrippScreenState();
 }
 
-class _AcarboseScreenState extends State<AcarboseScreen> {
+class _HufagrippScreenState extends State<HufagrippScreen> {
   int _currentIndex = 0;
 
   @override
@@ -58,7 +58,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             //Nama Obat
             children: [
               Text(
-                "Acarbose",
+                "Hufagripp",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 48,
@@ -91,7 +91,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             ),
             //Field Deskripsi Obat
             child: const Text(
-              "Acarbose atau akarbose adalah obat golongan antidiabetes. Obat ini bekerja dengan cara memperlambat pemecahan karbohidrat dalam makan menjadi gula, sehingga kadar gula darah tidak naik drastis setelah makan.\n\nAcarbose digunakan untuk mengobati diabetes tipe 2, yaitu kondisi di mana tubuh tidak dapat menggunakan insulin secara normal sehingga menyebabkan kenaikan gula darah. ",
+              "Hufagripp adalah obat untuk meredakan gejala flu, batuk, pilek, dan demam (panas) tergantung pada varian obatnya. Karena beda gejala beda warna Hufagrippnya. Ada beberapa varian Hufagripp dengan warna produk yang berbeda, yaitu Hufagripp  Flu & Batuk dengan warna kuning, Hufagripp BP dengan warna hijau, Hufagripp TMP dengan warna merah, dan Hufagripp Pilek yang berwarna biru.",
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontFamily: 'Nunito-Regular',
@@ -128,7 +128,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Bentuk Obat
                       child: Text(
-                        'Tablet',
+                        'Sirop',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,
@@ -193,7 +193,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Aturan Pakai
                       child: Text(
-                        'Dosis awal acarbose untuk orang dewasa adalah 25–50 mg 3 kali sehari. Jika diperlukan, dosis dapat ditingkatkan menjadi 100–200 mg 3 kali sehari setelah 4–8 minggu.',
+                        'Sebelum mengonsumsi obat ini, pastikan Anda mengocok obat terlebih dahulu. Jika lupa mengonsumsi Hufagripp, segera konsumsi obat tersebut bila jeda waktu dengan dosis selanjutnya belum terlalu dekat. ',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,

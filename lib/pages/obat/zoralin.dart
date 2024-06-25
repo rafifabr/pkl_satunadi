@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pkl_satunadi/pages/obat/dashboard_obat.dart';
 
-class AcarboseScreen extends StatefulWidget {
-  const AcarboseScreen({Key? key}) : super(key: key);
+class ZoralinScreen extends StatefulWidget {
+  const ZoralinScreen({Key? key}) : super(key: key);
 
   @override
-  State<AcarboseScreen> createState() => _AcarboseScreenState();
+  State<ZoralinScreen> createState() => _ZoralinScreenState();
 }
 
-class _AcarboseScreenState extends State<AcarboseScreen> {
+class _ZoralinScreenState extends State<ZoralinScreen> {
   int _currentIndex = 0;
 
   @override
@@ -58,7 +58,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             //Nama Obat
             children: [
               Text(
-                "Acarbose",
+                "Zoralin",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 48,
@@ -91,7 +91,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             ),
             //Field Deskripsi Obat
             child: const Text(
-              "Acarbose atau akarbose adalah obat golongan antidiabetes. Obat ini bekerja dengan cara memperlambat pemecahan karbohidrat dalam makan menjadi gula, sehingga kadar gula darah tidak naik drastis setelah makan.\n\nAcarbose digunakan untuk mengobati diabetes tipe 2, yaitu kondisi di mana tubuh tidak dapat menggunakan insulin secara normal sehingga menyebabkan kenaikan gula darah. ",
+              "Zoralin adalah tablet antijamur berbahan aktif ketoconazole. Zoralin dapat mengobati infeksi jamur sistemik yang menyerang organ dalam tubuh. Zoralin juga dapat mengatasi infeksi jamur kulit yang tidak bisa disembuhkan dengan obat antijamur lain. Dalam satu tablet Zoralin, terkandung 200 mg ketoconazole. Obat ini menghambat pembentukan ergosterol dan enzim tertentu pada jamur. Tanpa komponen tersebut, jamur tidak bisa hidup dan berkembang biak. ",
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontFamily: 'Nunito-Regular',
@@ -193,7 +193,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Aturan Pakai
                       child: Text(
-                        'Dosis awal acarbose untuk orang dewasa adalah 25–50 mg 3 kali sehari. Jika diperlukan, dosis dapat ditingkatkan menjadi 100–200 mg 3 kali sehari setelah 4–8 minggu.',
+                        'Dosis awal: 2–3 tablet per hari. Dosis dapat ditingkatkan sebanyak 1 tablet setelah pemakaian selama 7–28 hari. Dosis lanjutan: 3–4 tablet per hari, dosis maksimal 6 tablet per hari yang dibagi ke dalam 2–3 kali jadwal konsumsi.',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,
