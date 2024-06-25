@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pkl_satunadi/pages/obat/dashboard_obat.dart';
 
-class AcarboseScreen extends StatefulWidget {
-  const AcarboseScreen({Key? key}) : super(key: key);
+class YodiumfilScreen extends StatefulWidget {
+  const YodiumfilScreen({Key? key}) : super(key: key);
 
   @override
-  State<AcarboseScreen> createState() => _AcarboseScreenState();
+  State<YodiumfilScreen> createState() => _YodiumScreenState();
 }
 
-class _AcarboseScreenState extends State<AcarboseScreen> {
+class _YodiumScreenState extends State<YodiumfilScreen> {
   int _currentIndex = 0;
 
   @override
@@ -58,7 +58,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             //Nama Obat
             children: [
               Text(
-                "Acarbose",
+                "Yodium",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 48,
@@ -91,7 +91,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             ),
             //Field Deskripsi Obat
             child: const Text(
-              "Acarbose atau akarbose adalah obat golongan antidiabetes. Obat ini bekerja dengan cara memperlambat pemecahan karbohidrat dalam makan menjadi gula, sehingga kadar gula darah tidak naik drastis setelah makan.\n\nAcarbose digunakan untuk mengobati diabetes tipe 2, yaitu kondisi di mana tubuh tidak dapat menggunakan insulin secara normal sehingga menyebabkan kenaikan gula darah. ",
+              "Yodium adalah mineral penting yang diperlukan oleh tubuh untuk memproduksi hormon tiroid. Kekurangan yodium bisa menyebabkan gondok dan kelainan pada kelenjar tiroid lainnya. Kondisi ini bisa berdampak negatif pada tubuh sehingga harus dicegah. Hormon tiroid dibutuhkan untuk mengatur fungsi organ tubuh, mulai dari menghasilkan energi, memelihara kesehatan jantung, menjaga sistem organ reproduksi, membantu produksi hormon.",
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontFamily: 'Nunito-Regular',
@@ -193,7 +193,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Aturan Pakai
                       child: Text(
-                        'Dosis awal acarbose untuk orang dewasa adalah 25–50 mg 3 kali sehari. Jika diperlukan, dosis dapat ditingkatkan menjadi 100–200 mg 3 kali sehari setelah 4–8 minggu.',
+                        'Dosis umum suplementasi yodium untuk mencegah atau mengatasi kekurangan yodium adalah 150–250 mcg setiap hari.',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,

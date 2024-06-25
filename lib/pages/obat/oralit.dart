@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pkl_satunadi/pages/obat/dashboard_obat.dart';
 
-class AcarboseScreen extends StatefulWidget {
-  const AcarboseScreen({Key? key}) : super(key: key);
+class OralitScreen extends StatefulWidget {
+  const OralitScreen({Key? key}) : super(key: key);
 
   @override
-  State<AcarboseScreen> createState() => _AcarboseScreenState();
+  State<OralitScreen> createState() => _OralitScreenState();
 }
 
-class _AcarboseScreenState extends State<AcarboseScreen> {
+class _OralitScreenState extends State<OralitScreen> {
   int _currentIndex = 0;
 
   @override
@@ -58,7 +58,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             //Nama Obat
             children: [
               Text(
-                "Acarbose",
+                "Oralit",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 48,
@@ -91,7 +91,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             ),
             //Field Deskripsi Obat
             child: const Text(
-              "Acarbose atau akarbose adalah obat golongan antidiabetes. Obat ini bekerja dengan cara memperlambat pemecahan karbohidrat dalam makan menjadi gula, sehingga kadar gula darah tidak naik drastis setelah makan.\n\nAcarbose digunakan untuk mengobati diabetes tipe 2, yaitu kondisi di mana tubuh tidak dapat menggunakan insulin secara normal sehingga menyebabkan kenaikan gula darah. ",
+              "Oralit adalah obat untuk menggantikan cairan dan elektrolit tubuh yang hilang akibat diare, muntah, demam, atau kondisi lain. Oralit bisa dikonsumsi oleh bayi, anak-anak, maupun orang dewasa. Diare atau muntah yang tidak ditangani dapat menyebabkan tubuh kekurangan cairan (dehidrasi). Beberapa tanda dehidrasi adalah rasa sangat haus, lidah dan mulut kering, jarang buang air kecil, urine berwarna gelap, lemas, pipi cekung, atau pusing. ",
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontFamily: 'Nunito-Regular',
@@ -128,7 +128,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Bentuk Obat
                       child: Text(
-                        'Tablet',
+                        'Serbuk',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,
@@ -193,7 +193,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Aturan Pakai
                       child: Text(
-                        'Dosis awal acarbose untuk orang dewasa adalah 25–50 mg 3 kali sehari. Jika diperlukan, dosis dapat ditingkatkan menjadi 100–200 mg 3 kali sehari setelah 4–8 minggu.',
+                        'Oralit perlu dicampurkan ke dalam 200 ml air matang sebelum diminum. Dosis Oralit sesuai usia untuk mencegah dan mengatasi dehidrasi, akibat muntah, diare, muntaber, atau keringat berlebihan.',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,

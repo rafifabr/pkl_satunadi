@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pkl_satunadi/pages/obat/dashboard_obat.dart';
 
-class AcarboseScreen extends StatefulWidget {
-  const AcarboseScreen({Key? key}) : super(key: key);
+class DulcolaxScreen extends StatefulWidget {
+  const DulcolaxScreen({Key? key}) : super(key: key);
 
   @override
-  State<AcarboseScreen> createState() => _AcarboseScreenState();
+  State<DulcolaxScreen> createState() => _DulcolaxScreenState();
 }
 
-class _AcarboseScreenState extends State<AcarboseScreen> {
+class _DulcolaxScreenState extends State<DulcolaxScreen> {
   int _currentIndex = 0;
 
   @override
@@ -58,7 +58,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             //Nama Obat
             children: [
               Text(
-                "Acarbose",
+                "Dulcolax",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 48,
@@ -91,7 +91,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             ),
             //Field Deskripsi Obat
             child: const Text(
-              "Acarbose atau akarbose adalah obat golongan antidiabetes. Obat ini bekerja dengan cara memperlambat pemecahan karbohidrat dalam makan menjadi gula, sehingga kadar gula darah tidak naik drastis setelah makan.\n\nAcarbose digunakan untuk mengobati diabetes tipe 2, yaitu kondisi di mana tubuh tidak dapat menggunakan insulin secara normal sehingga menyebabkan kenaikan gula darah. ",
+              "Dulcolax adalah obat pencahar untuk mengatasi sembelit atau susah buang air besar (BAB). Dulcolax mengandung bisacodyl yang dapat melancarkan BAB, serta meredakan kembung dan sakit perut akibat sembelit. Kandungan bisacodyl dalam Dulcolax bekerja meningkatkan gerakan usus besar. Dengan begitu, tinja dan gas yang menumpuk di dalam usus cepat terdorong keluar.",
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontFamily: 'Nunito-Regular',
@@ -193,7 +193,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Aturan Pakai
                       child: Text(
-                        'Dosis awal acarbose untuk orang dewasa adalah 25–50 mg 3 kali sehari. Jika diperlukan, dosis dapat ditingkatkan menjadi 100–200 mg 3 kali sehari setelah 4–8 minggu.',
+                        'Konsumsilah Dulcolax saat perut kosong pada malam hari menjelang tidur agar BAB lancar pada pagi harinya. Hal ini karena pagi hari merupakan waktu terbaik untuk buang air besar.',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,

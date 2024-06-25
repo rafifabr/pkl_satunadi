@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pkl_satunadi/pages/obat/dashboard_obat.dart';
 
-class AcarboseScreen extends StatefulWidget {
-  const AcarboseScreen({Key? key}) : super(key: key);
+class LamesonScreen extends StatefulWidget {
+  const LamesonScreen({Key? key}) : super(key: key);
 
   @override
-  State<AcarboseScreen> createState() => _AcarboseScreenState();
+  State<LamesonScreen> createState() => _LamesonScreenState();
 }
 
-class _AcarboseScreenState extends State<AcarboseScreen> {
+class _LamesonScreenState extends State<LamesonScreen> {
   int _currentIndex = 0;
 
   @override
@@ -58,7 +58,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             //Nama Obat
             children: [
               Text(
-                "Acarbose",
+                "Lameson",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 48,
@@ -91,7 +91,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             ),
             //Field Deskripsi Obat
             child: const Text(
-              "Acarbose atau akarbose adalah obat golongan antidiabetes. Obat ini bekerja dengan cara memperlambat pemecahan karbohidrat dalam makan menjadi gula, sehingga kadar gula darah tidak naik drastis setelah makan.\n\nAcarbose digunakan untuk mengobati diabetes tipe 2, yaitu kondisi di mana tubuh tidak dapat menggunakan insulin secara normal sehingga menyebabkan kenaikan gula darah. ",
+              "Lameson adalah obat untuk mengatasi peradangan dan reaksi alergi. Obat ini mengandung bahan aktif methylprednisolone. Lameson tersedia dalam bentuk tablet, suspensi, dan suntik yang hanya dapat digunakan dengan resep dokter. Lameson termasuk dalam obat kortikosteroid. Obat ini bekerja menghambat produksi senyawa kimia yang memicu terjadinya peradangan di dalam tubuh. Dengan begitu, gejala radang, seperti nyeri dan bengkak.",
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontFamily: 'Nunito-Regular',
@@ -193,7 +193,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Aturan Pakai
                       child: Text(
-                        'Dosis awal acarbose untuk orang dewasa adalah 25–50 mg 3 kali sehari. Jika diperlukan, dosis dapat ditingkatkan menjadi 100–200 mg 3 kali sehari setelah 4–8 minggu.',
+                        'Dosis awal 4–48 mg per hari. Pada kondisi parah yang akut, dosis awal dapat langsung ditingkatkan hingga 100 mg per hari.',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,

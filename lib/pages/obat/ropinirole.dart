@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pkl_satunadi/pages/obat/dashboard_obat.dart';
 
-class AcarboseScreen extends StatefulWidget {
-  const AcarboseScreen({Key? key}) : super(key: key);
+class RopiniroleScreen extends StatefulWidget {
+  const RopiniroleScreen({Key? key}) : super(key: key);
 
   @override
-  State<AcarboseScreen> createState() => _AcarboseScreenState();
+  State<RopiniroleScreen> createState() => _RopiniroleScreenState();
 }
 
-class _AcarboseScreenState extends State<AcarboseScreen> {
+class _RopiniroleScreenState extends State<RopiniroleScreen> {
   int _currentIndex = 0;
 
   @override
@@ -58,7 +58,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             //Nama Obat
             children: [
               Text(
-                "Acarbose",
+                "Ropinirole",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 48,
@@ -91,7 +91,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             ),
             //Field Deskripsi Obat
             child: const Text(
-              "Acarbose atau akarbose adalah obat golongan antidiabetes. Obat ini bekerja dengan cara memperlambat pemecahan karbohidrat dalam makan menjadi gula, sehingga kadar gula darah tidak naik drastis setelah makan.\n\nAcarbose digunakan untuk mengobati diabetes tipe 2, yaitu kondisi di mana tubuh tidak dapat menggunakan insulin secara normal sehingga menyebabkan kenaikan gula darah. ",
+              "Ropinirole adalah salah satu jenis obat golongan agonis dopamin yang digunakan untuk menangani gangguan saraf motorik, seperti penyakit Parkinson. Ropinirole bekerja dengan cara menyeimbangkan kadar zat dopamine di dalam otak, yang dibutuhkan untuk mengendalikan pergerakan tubuh. Dengan demikian, obat ini dapat mengembalikan keseimbangan dan kemampuan gerak tubuh serta menurunkan tingkat tremor pada penderita penyakit Parkinson.",
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontFamily: 'Nunito-Regular',
@@ -193,7 +193,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Aturan Pakai
                       child: Text(
-                        'Dosis awal acarbose untuk orang dewasa adalah 25–50 mg 3 kali sehari. Jika diperlukan, dosis dapat ditingkatkan menjadi 100–200 mg 3 kali sehari setelah 4–8 minggu.',
+                        'Dosis awal: 2 mg 1 kali sehari, selama 1 minggu. Dosis bisa dinaikkan di minggu kedua menjadi 4 mg, 1 kali sehari.',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,

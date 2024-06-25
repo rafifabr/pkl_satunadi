@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pkl_satunadi/pages/obat/dashboard_obat.dart';
 
-class AcarboseScreen extends StatefulWidget {
-  const AcarboseScreen({Key? key}) : super(key: key);
+class KonidinScreen extends StatefulWidget {
+  const KonidinScreen({Key? key}) : super(key: key);
 
   @override
-  State<AcarboseScreen> createState() => _AcarboseScreenState();
+  State<KonidinScreen> createState() => _KonidinScreenState();
 }
 
-class _AcarboseScreenState extends State<AcarboseScreen> {
+class _KonidinScreenState extends State<KonidinScreen> {
   int _currentIndex = 0;
 
   @override
@@ -58,7 +58,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             //Nama Obat
             children: [
               Text(
-                "Acarbose",
+                "Konidin",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 48,
@@ -91,7 +91,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             ),
             //Field Deskripsi Obat
             child: const Text(
-              "Acarbose atau akarbose adalah obat golongan antidiabetes. Obat ini bekerja dengan cara memperlambat pemecahan karbohidrat dalam makan menjadi gula, sehingga kadar gula darah tidak naik drastis setelah makan.\n\nAcarbose digunakan untuk mengobati diabetes tipe 2, yaitu kondisi di mana tubuh tidak dapat menggunakan insulin secara normal sehingga menyebabkan kenaikan gula darah. ",
+              "Konidin adalah obat yang digunakan untuk mengatasi batuk yang bisa terjadi karena alergi, flu, atau gejala bronkitis. Konidin dapat dikonsumsi oleh orang dewasa maupun anak-anak. Konidin tersedia dalam bentuk tablet, sirup, dan permen. Masing-masing varian ini mengandung kombinasi bahan aktif yang berbeda-beda, sesuai dengan manfaatnya. Konidin dijual secara bebas di pasaran dan dapat dibeli tanpa resep dokter. ",
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontFamily: 'Nunito-Regular',
@@ -193,7 +193,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Aturan Pakai
                       child: Text(
-                        'Dosis awal acarbose untuk orang dewasa adalah 25–50 mg 3 kali sehari. Jika diperlukan, dosis dapat ditingkatkan menjadi 100–200 mg 3 kali sehari setelah 4–8 minggu.',
+                        'Dewasa dan anak usia di atas 12 tahun: 1–2 tablet, 3 kali sehari, Anak usia 6–12 tahun: ½–1 tablet, 3 kali sehari, Anak usia 3–6 tahun: ¼–½ tablet, 3 kali sehari.',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,

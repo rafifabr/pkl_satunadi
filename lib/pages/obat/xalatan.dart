@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pkl_satunadi/pages/obat/dashboard_obat.dart';
 
-class AcarboseScreen extends StatefulWidget {
-  const AcarboseScreen({Key? key}) : super(key: key);
+class XalatanfilScreen extends StatefulWidget {
+  const XalatanfilScreen({Key? key}) : super(key: key);
 
   @override
-  State<AcarboseScreen> createState() => _AcarboseScreenState();
+  State<XalatanfilScreen> createState() => _XalatanScreenState();
 }
 
-class _AcarboseScreenState extends State<AcarboseScreen> {
+class _XalatanScreenState extends State<XalatanfilScreen> {
   int _currentIndex = 0;
 
   @override
@@ -58,7 +58,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             //Nama Obat
             children: [
               Text(
-                "Acarbose",
+                "Xalatan",
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 48,
@@ -91,7 +91,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
             ),
             //Field Deskripsi Obat
             child: const Text(
-              "Acarbose atau akarbose adalah obat golongan antidiabetes. Obat ini bekerja dengan cara memperlambat pemecahan karbohidrat dalam makan menjadi gula, sehingga kadar gula darah tidak naik drastis setelah makan.\n\nAcarbose digunakan untuk mengobati diabetes tipe 2, yaitu kondisi di mana tubuh tidak dapat menggunakan insulin secara normal sehingga menyebabkan kenaikan gula darah. ",
+              "Xalatan adalah obat tetes mata yang bermanfaat untuk mengurangi tekanan di dalam mata pada pasien hipertensi okular dan glaukoma. Perlu diketahui bahwa obat ini hanya boleh digunakan berdasarkan resep dokter. Xalatan mengandung latanoprost yang termasuk dalam obat analog prostaglandin. Obat ini bekerja dengan cara meningkatkan aliran cairan dari dalam mata ke luar.",
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontFamily: 'Nunito-Regular',
@@ -128,7 +128,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Bentuk Obat
                       child: Text(
-                        'Tablet',
+                        'Tetes Mata',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,
@@ -193,7 +193,7 @@ class _AcarboseScreenState extends State<AcarboseScreen> {
                     child: Center(
                       //Field Aturan Pakai
                       child: Text(
-                        'Dosis awal acarbose untuk orang dewasa adalah 25–50 mg 3 kali sehari. Jika diperlukan, dosis dapat ditingkatkan menjadi 100–200 mg 3 kali sehari setelah 4–8 minggu.',
+                        'Obat tetes mata Xalatan digunakan untuk mengatasi tekanan intraokular pada orang yang menderita glaukoma sudut terbuka dan glaukoma sudut tertutup kronis atau hipertensi okular.',
                         style: TextStyle(
                             fontFamily: 'Nunito-Regular',
                             color: Colors.black,
