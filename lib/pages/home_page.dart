@@ -11,8 +11,8 @@ import 'package:pkl_satunadi/rekam_medis.dart';
 import 'package:pkl_satunadi/style/app_style.dart';
 import '../data/data.dart';
 import '../size_config.dart';
-// import 'e_reservasi_page.dart'; 
-// import 'informasi_obat_page.dart'; 
+// import 'e_reservasi_page.dart';
+// import 'informasi_obat_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -63,26 +63,32 @@ class _HomePageState extends State<HomePage> {
           switch (index) {
             case 0:
               // Beranda
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => const HomePage()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const HomePage()));
               break;
             case 1:
               // Riwayat
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RiwayatPage()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => RiwayatPage()));
               break;
             case 2:
               // Kartu
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => KartuPage()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => KartuPage()));
               break;
             case 3:
               // Pengaturan
               Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => const NotificationPage()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const NotificationPage()));
               break;
             case 4:
               // Pengaturan
               Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => const SettingsPage()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SettingsPage()));
               break;
           }
         });
@@ -135,10 +141,10 @@ class Services extends StatelessWidget {
         Text(
           "Silahkan Pilih Jenis Layanan yang Anda Inginkan Hari Ini",
           style: TextStyle(
-              fontFamily: 'Nunito-Bold',
-              color: Color.fromARGB(255, 255, 255, 255),
-              fontSize: 20,
-            ),
+            fontFamily: 'Nunito-Bold',
+            color: Color.fromARGB(255, 255, 255, 255),
+            fontSize: 20,
+          ),
         ),
         const SizedBox(height: 12),
         SizedBox(
@@ -157,7 +163,8 @@ class Services extends StatelessWidget {
                       // Beralih ke halaman E-Reservasi
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => DetailPasienPage()),
+                        MaterialPageRoute(
+                            builder: (context) => DetailPasienPage()),
                       );
                     } else if (e.title == 'Informasi Obat') {
                       // Beralih ke halaman Informasi Obat
@@ -169,7 +176,8 @@ class Services extends StatelessWidget {
                       // Beralih ke halaman Rekam Medis
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => RekamMedisPage()),
+                        MaterialPageRoute(
+                            builder: (context) => RekamMedisPage()),
                       );
                     }
                     // Tambahkan logika untuk layanan lain jika diperlukan
@@ -242,20 +250,22 @@ class SelamatDatang extends StatelessWidget {
                       children: [
                         Text(
                           "Selamat Datang,\nAldi Barbara",
-                          style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: 1,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.titleLarge!.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: 1,
+                                  ),
                         ),
                         SizedBox(height: SizeConfig.blockSizeVertical! * 1),
                         Text(
                           "Selalu jaga kesehatan, ya!",
-                          style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 1,
-                                fontSize: 13.0,
-                                height: 1.5,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.titleLarge!.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 1,
+                                    fontSize: 13.0,
+                                    height: 1.5,
+                                  ),
                         ),
                       ],
                     ),
@@ -263,7 +273,9 @@ class SelamatDatang extends StatelessWidget {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(top: SizeConfig.blockSizeVertical! * 1), // Adjust the top padding here
+                    padding: EdgeInsets.only(
+                        top: SizeConfig.blockSizeVertical! *
+                            1), // Adjust the top padding here
                     child: Image.asset(AppStyle.image1),
                   ),
                 )

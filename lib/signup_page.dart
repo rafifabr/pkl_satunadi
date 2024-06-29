@@ -25,7 +25,6 @@ class _SignUpPageState extends State<SignUpPage> {
   late Color myColor;
   late Size mediaSize;
   bool isPasswordVisible = false;
-  bool isRepeatPasswordVisible = false;
 
   final _nikController = TextEditingController();
   final _nameController = TextEditingController();
@@ -48,60 +47,84 @@ class _SignUpPageState extends State<SignUpPage> {
     super.dispose();
   }
 
+  bool isNIKValid(String nik) {
+    return nik.length == 16 && int.tryParse(nik) != null;
+  }
+
+  bool isPhoneValid(String phone) {
+    return phone.length == 11 && int.tryParse(phone) != null;
+  }
+
   Future signUp() async {
-    //auth user
+    // Validasi NIK
+    if (!isNIKValid(_nikController.text.trim())) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('NIK harus terdiri dari 13 angka.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    // Validasi Nomor Telepon
+    if (!isPhoneValid(_phoneController.text.trim())) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Nomor telepon harus terdiri dari 11 angka.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    // Auth user
     if (passwordConfirmed()) {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
+      try {
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
 
-      //add user details
-      await addUserDetails(
-        _nikController.text.trim(),
-        _nameController.text.trim(),
-        selectedGender!,
-        int.parse(_phoneController.text.trim()),
-        _emailController.text.trim(),
-        _passwordController.text.trim(),
-        _repeatPasswordController.text.trim(),
-      );
+        User? user = userCredential.user;
 
-      // Navigate to HomePage
-      Navigator.push(
-        // ignore: use_build_context_synchronously
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-      );
+        if (user != null) {
+          await addUserDetails(
+            user.uid,
+            _nikController.text.trim(),
+            _nameController.text.trim(),
+            selectedGender!,
+            int.parse(_phoneController.text.trim()),
+            _emailController.text.trim(),
+          );
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
+        }
+      } on FirebaseAuthException catch (e) {
+        print('Error: $e');
+      }
     }
   }
 
-  Future addUserDetails(
-      String nik,
-      String namaLengkap,
-      String gender,
-      int nomorTelepon,
-      String email,
-      String password,
-      String ulangiPassword) async {
-    await FirebaseFirestore.instance.collection('users').add({
+  Future addUserDetails(String uid, String nik, String namaLengkap,
+      String gender, int nomorTelepon, String email) async {
+    await FirebaseFirestore.instance.collection('users').doc(uid).set({
+      'UID': uid,
       'NIK': nik,
       'namaLengkap': namaLengkap,
       'gender': gender,
       'nomorTelepon': nomorTelepon,
       'email': email,
-      'password': password,
-      'ulangiPassword': ulangiPassword,
     });
   }
 
   bool passwordConfirmed() {
-    if (_passwordController.text.trim() ==
-        _repeatPasswordController.text.trim()) {
-      return true;
-    } else {
-      return false;
-    }
+    return _passwordController.text.trim() ==
+        _repeatPasswordController.text.trim();
   }
 
   @override

@@ -1,22 +1,176 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pkl_satunadi/screens/detail_rsvp.dart';
-import 'package:pkl_satunadi/screens/dokter_umum_screen.dart';
+import 'package:pkl_satunadi/screens/qr_page.dart';
 
-void main() {
-  runApp(MyApp());
+class ResumeRsvpPage extends StatefulWidget {
+  final String reservasiId;
+  final String poliklinik;
+  final String metodePembayaran;
+  final Map<String, dynamic> reservasi;
+
+  const ResumeRsvpPage({
+    required this.reservasiId,
+    required this.poliklinik,
+    required this.metodePembayaran,
+    required this.reservasi,
+  });
+
+  @override
+  _ResumeRsvpPageState createState() => _ResumeRsvpPageState();
 }
 
-class MyApp extends StatelessWidget {
+class _ResumeRsvpPageState extends State<ResumeRsvpPage> {
+  late Future<DocumentSnapshot> reservasiFuture;
+  Future<Map<String, dynamic>?>? pasienFuture;
+  String? userId;
+
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: ResumeRsvpPage(),
+  void initState() {
+    super.initState();
+    fetchUserId();
+  }
+
+  void fetchUserId() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      setState(() {
+        userId = user.uid;
+        reservasiFuture = fetchReservasi();
+      });
+    } else {
+      throw Exception("User not logged in");
+    }
+  }
+
+  Future<DocumentSnapshot> fetchReservasi() async {
+    try {
+      DocumentSnapshot reservasi = await FirebaseFirestore.instance
+          .collection('reservasi')
+          .doc(widget.reservasiId)
+          .get();
+
+      if (reservasi.exists) {
+        Map<String, dynamic> data = reservasi.data() as Map<String, dynamic>;
+        if (data.containsKey('userId')) {
+          pasienFuture = fetchPasien(data['userId']);
+        } else {
+          pasienFuture = Future.value(null);
+        }
+      } else {
+        pasienFuture = Future.value(null);
+      }
+      return reservasi;
+    } catch (error) {
+      throw Exception("Error fetching reservasi: $error");
+    }
+  }
+
+  Future<Map<String, dynamic>?> fetchPasien(String userId) async {
+    try {
+      DocumentSnapshot? pasienSnapshot;
+      Map<String, dynamic>? pasienData;
+
+      // Fetch from pasienLama first
+      QuerySnapshot querySnapshotLama = await FirebaseFirestore.instance
+          .collection('pasienLama')
+          .where('userId', isEqualTo: userId)
+          .limit(1)
+          .get();
+
+      if (querySnapshotLama.docs.isNotEmpty) {
+        pasienSnapshot = querySnapshotLama.docs.first;
+        pasienData = pasienSnapshot.data() as Map<String, dynamic>;
+      } else {
+        // If not found in pasienLama, fetch from pasienBaru
+        QuerySnapshot querySnapshotBaru = await FirebaseFirestore.instance
+            .collection('pasienBaru')
+            .where('userId', isEqualTo: userId)
+            .limit(1)
+            .get();
+
+        if (querySnapshotBaru.docs.isNotEmpty) {
+          pasienSnapshot = querySnapshotBaru.docs.first;
+          pasienData = pasienSnapshot.data() as Map<String, dynamic>;
+        }
+      }
+
+      if (pasienSnapshot == null) {
+        print(
+            "Logging information: Pasien with userId $userId does not exist.");
+        return null;
+      }
+
+      // Always fetch tanggalLahir and jenisKelamin from pasienBaru
+      DocumentSnapshot pasienBaruSnapshot = await FirebaseFirestore.instance
+          .collection('pasienBaru')
+          .doc(userId)
+          .get();
+
+      if (pasienBaruSnapshot.exists) {
+        Map<String, dynamic> pasienBaruData =
+            pasienBaruSnapshot.data() as Map<String, dynamic>;
+        pasienData?['tanggalLahir'] = pasienBaruData['tanggalLahir'];
+        pasienData?['jenisKelamin'] = pasienBaruData['jenisKelamin'];
+      }
+
+      return pasienData;
+    } catch (error) {
+      if (error is FirebaseException && error.code == 'permission-denied') {
+        print(
+            "Logging information: Permission denied when accessing pasien data.");
+      } else {
+        print("Logging information: Error fetching pasien: $error");
+      }
+      throw Exception("Error fetching pasien: $error");
+    }
+  }
+
+  void _batalkanReservasi() async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('reservasi')
+          .doc(widget.reservasiId)
+          .delete();
+
+      // Redirect to previous screen after successful deletion
+      Navigator.pop(context, true);
+    } catch (e) {
+      print("Error deleting reservasi: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Gagal membatalkan reservasi: $e"),
+        ),
+      );
+    }
+  }
+
+  void _showConfirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Batalkan Reservasi'),
+          content: Text('Apakah yakin untuk membatalkan reservasi ini?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Tidak'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Ya'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _batalkanReservasi();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
-}
-
-class ResumeRsvpPage extends StatelessWidget {
-  const ResumeRsvpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,364 +191,185 @@ class ResumeRsvpPage extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: Colors.white,
       ),
-      backgroundColor: Color(0xFF3B636E),
-      body: Column(
+      backgroundColor: const Color(0xFF3B636E),
+      body: userId == null
+          ? Center(child: CircularProgressIndicator())
+          : FutureBuilder<DocumentSnapshot>(
+              future: reservasiFuture,
+              builder: (BuildContext context,
+                  AsyncSnapshot<DocumentSnapshot> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.hasError) {
+                  return Center(child: Text("Error: ${snapshot.error}"));
+                }
+                if (!snapshot.hasData || !snapshot.data!.exists) {
+                  return Center(child: Text("Reservasi tidak ditemukan"));
+                }
+
+                Map<String, dynamic> reservasiData =
+                    snapshot.data!.data() as Map<String, dynamic>;
+
+                return FutureBuilder<Map<String, dynamic>?>(
+                  future: pasienFuture,
+                  builder: (BuildContext context,
+                      AsyncSnapshot<Map<String, dynamic>?> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    if (snapshot.hasError) {
+                      return Center(child: Text("Error: ${snapshot.error}"));
+                    }
+                    if (!snapshot.hasData || snapshot.data == null) {
+                      return Center(child: Text("Pasien tidak ditemukan"));
+                    }
+
+                    Map<String, dynamic>? pasienData = snapshot.data;
+
+                    return buildContent(reservasiData, pasienData);
+                  },
+                );
+              },
+            ),
+    );
+  }
+
+  Widget buildContent(
+      Map<String, dynamic> reservasiData, Map<String, dynamic>? pasienData) {
+    return SingleChildScrollView(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          const SizedBox(height: 150),
           Container(
-            padding: EdgeInsets.symmetric(vertical: 20),
-            color: null,
-            // child: const Center(
-            //   child: Text(
-            //     'Rincian Reservasi Anda',
-            //     style: TextStyle(
-            //       fontFamily: 'Nunito-Bold',
-            //       color: Colors.white,
-            //       fontSize: 25,
-            //     ),
-            //   ),
-            // ),
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 50),
+            margin:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
             decoration: BoxDecoration(
-              color: const Color(0xFFFFFDFA),
-              borderRadius: BorderRadius.circular(0),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 8.0,
+                ),
+              ],
             ),
-            constraints: const BoxConstraints(
-              maxHeight: 390.0,
-            ),
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 10),
-                      child:  Icon(
-                        Icons.content_paste,
-                        size: 20,
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(width: 5),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10),
-                      child: Text(
-                        'Detail Reservasi',
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Bold',
-                          color: Colors.black,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 5),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Lokasi",
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Regular',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                      Text(
-                        "RS SatuNadi",
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Regular',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
+                const Text(
+                  'Detail Reservasi',
+                  style: TextStyle(
+                    fontFamily: 'Nunito-Bold',
+                    color: Colors.black,
+                    fontSize: 20,
                   ),
                 ),
-                SizedBox(height: 8.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Poliklinik",
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Regular',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                      Text(
-                        "Umum",
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Regular',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
+                const SizedBox(height: 10),
+                buildDetailRow('Lokasi', 'RS SatuNadi'),
+                buildDetailRow(
+                    'Poliklinik', reservasiData['poliklinik'] ?? 'N/A'),
+                buildDetailRow('Tanggal', reservasiData['tanggal'] ?? 'N/A'),
+                buildDetailRow('Waktu', reservasiData['waktu'] ?? 'N/A'),
+                buildDetailRow('Dokter', reservasiData['namaDokter'] ?? 'N/A'),
+                const Divider(color: Colors.black),
+                const Text(
+                  'Informasi Pribadi',
+                  style: TextStyle(
+                    fontFamily: 'Nunito-Bold',
+                    color: Colors.black,
+                    fontSize: 20,
                   ),
                 ),
-                SizedBox(height: 8.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Tanggal\n& Waktu",
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Regular',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                      Text(
-                        "07/05/2024,\n10:00 WIB",
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Regular',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                        textAlign: TextAlign.end,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 8.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Dokter",
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Regular',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                      Text(
-                        "Mia Goth",
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Regular',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  color: Colors.black,
-                  thickness: 1,
-                  indent: 20,
-                  endIndent: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 0),
-                      child:  Icon(
-                        Icons.person,
-                        size: 20,
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(width: 5),
-                    Padding(
-                      padding: EdgeInsets.only(top: 0),
-                      child: Text(
-                        'Informasi Pribadi',
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Bold',
-                          color: Colors.black,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 5),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "No Rekam Medis",
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Regular',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                      Text(
-                        "PB001",
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Regular',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 8.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Nama",
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Regular',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                      Text(
-                        "Aldi Barbara",
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Regular',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 8.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Tanggal Lahir",
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Regular',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                      Text(
-                        "12/05/1992",
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Regular',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 8.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Jenis Kelamin",
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Regular',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                      Text(
-                        "Laki-laki",
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Regular',
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const SizedBox(height: 10),
+                buildDetailRow('Pasien ID', pasienData?['pasienId'] ?? 'N/A'),
+                buildDetailRow('Nama', pasienData?['namaPasien'] ?? 'N/A'),
+                // buildDetailRow(
+                //     'Tanggal Lahir', pasienData?['tanggalLahir'] ?? 'N/A'),
+                // buildDetailRow(
+                //     'Jenis Kelamin', pasienData?['jenisKelamin'] ?? 'N/A'),
               ],
             ),
           ),
-          SizedBox(height: 40.0),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const DetailRsvpPage()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: const StadiumBorder(),
-                    elevation: 20,
-                    shadowColor: Colors.black,
-                    minimumSize: const Size(350, 45),
-                    backgroundColor: const Color(0xFF3E69FE),
-                  ),
-                  child: const Text(
-                    "Konfirmasi",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'Nunito-Bold',
-                      color: Colors.white,
-                    ),
+          const SizedBox(height: 20),
+          buildButton(
+            text: "Konfirmasi",
+            color: const Color(0xFF3E69FE),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => QRPage(
+                    reservasiId: widget.reservasiId,
+                    poliklinik: widget.poliklinik,
+                    metodePembayaran: widget.metodePembayaran,
                   ),
                 ),
-              ],
-            ),
+              );
+            },
           ),
-          SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => DoctorsUmumScreen()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: const StadiumBorder(),
-                    elevation: 20,
-                    shadowColor: Colors.black,
-                    minimumSize: const Size(350, 45),
-                    backgroundColor: Colors.red,
-                  ),
-                  child: const Text(
-                    "Edit Janji Temu",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'Nunito-Bold',
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20)
-              ],
-            ),
+          const SizedBox(height: 10),
+          buildButton(
+            text: "Batalkan Reservasi",
+            color: Colors.red,
+            onPressed: _showConfirmationDialog,
           ),
         ],
+      ),
+    );
+  }
+
+  Widget buildDetailRow(String title, String value) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            fontFamily: 'Nunito-Regular',
+            color: Colors.black,
+            fontSize: 16,
+          ),
+        ),
+        Text(
+          value,
+          style: const TextStyle(
+            fontFamily: 'Nunito-Regular',
+            color: Colors.black,
+            fontSize: 16,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildButton(
+      {required String text,
+      required Color color,
+      required VoidCallback onPressed}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color,
+          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+        ),
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontFamily: 'Nunito-Bold',
+            color: Colors.white,
+            fontSize: 18,
+          ),
+        ),
       ),
     );
   }

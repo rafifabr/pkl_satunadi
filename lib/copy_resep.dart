@@ -3,19 +3,6 @@ import 'package:pkl_satunadi/riwayat.dart';
 // import 'package:pkl_satunadi/screens/qr_page.dart';
 // import 'package:pkl_satunadi/screens/resume_rsvp.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: CopyResep(),
-    );
-  }
-}
-
 class CopyResep extends StatelessWidget {
   const CopyResep({super.key});
 
@@ -66,7 +53,7 @@ class CopyResep extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(top: 10),
-                      child:  Icon(
+                      child: Icon(
                         Icons.content_paste,
                         size: 20,
                         color: Colors.black,
@@ -198,7 +185,7 @@ class CopyResep extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(top: 0),
-                      child:  Icon(
+                      child: Icon(
                         Icons.person,
                         size: 20,
                         color: Colors.black,
@@ -315,7 +302,7 @@ class CopyResep extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(top: 10),
-                      child:  Icon(
+                      child: Icon(
                         Icons.content_paste,
                         size: 20,
                         color: Colors.black,
@@ -373,7 +360,7 @@ class CopyResep extends StatelessWidget {
                           color: Colors.black,
                           fontSize: 18,
                         ),
-                      ),    
+                      ),
                     ],
                   ),
                 ),
@@ -389,7 +376,7 @@ class CopyResep extends StatelessWidget {
                           color: Colors.black,
                           fontSize: 16,
                         ),
-                      ),    
+                      ),
                     ],
                   ),
                 ),
@@ -422,7 +409,7 @@ class CopyResep extends StatelessWidget {
                           color: Colors.black,
                           fontSize: 16,
                         ),
-                      ),    
+                      ),
                     ],
                   ),
                 ),
@@ -455,7 +442,7 @@ class CopyResep extends StatelessWidget {
                           color: Colors.black,
                           fontSize: 16,
                         ),
-                      ),    
+                      ),
                     ],
                   ),
                 ),
@@ -463,8 +450,8 @@ class CopyResep extends StatelessWidget {
               ],
             ),
           ),
-          ],
-          ),
-          );
+        ],
+      ),
+    );
   }
-  }
+}

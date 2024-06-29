@@ -1,25 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:pkl_satunadi/screens/dokter_umum.dart';
 import 'package:pkl_satunadi/screens/dokter_umum_screen.dart';
-import 'package:pkl_satunadi/screens/resume_rsvp.dart';
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: JenisPembayaran(),
-    );
-  }
-}
 
 class JenisPembayaran extends StatelessWidget {
+  final String poliklinik;
+  final DateTime selectedDate;
   String? selectedPaymentMethod;
 
-  JenisPembayaran({super.key});
+  JenisPembayaran(
+      {Key? key, required this.poliklinik, required this.selectedDate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +41,6 @@ class JenisPembayaran extends StatelessWidget {
               ),
             ),
 
-            // Container di bawah foto dokter
             Positioned(
               top: 315,
               child: Container(
@@ -95,11 +83,9 @@ class JenisPembayaran extends StatelessWidget {
                           ),
                         ],
                         onChanged: (value) {
-                          // Handle the selected value
-                          selectedPaymentMethod = value as String;
+                          selectedPaymentMethod = value;
                         },
                         decoration: const InputDecoration(
-                          // labelText: 'Metode Pembayaran',
                           filled: true,
                           fillColor: Colors.white,
                         ),
@@ -130,30 +116,30 @@ class JenisPembayaran extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Nama dokter
-                    Text(
-                      'dr. John Doe',
-                      style: TextStyle(
-                        fontFamily: 'Nunito-Bold',
-                        color: Colors.black,
-                        fontSize: 20,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    // Keterangan dr umum
-                    Text(
-                      'Dokter Umum',
-                      style: TextStyle(
-                        fontFamily: 'Nunito-Bold',
-                        fontSize: 16,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
+                // child: Column(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     // Nama dokter
+                //     Text(
+                //       'dr. John Doe',
+                //       style: TextStyle(
+                //         fontFamily: 'Nunito-Bold',
+                //         color: Colors.black,
+                //         fontSize: 20,
+                //       ),
+                //     ),
+                //     SizedBox(height: 8),
+                //     // Keterangan dr umum
+                //     Text(
+                //       'Dokter Umum',
+                //       style: TextStyle(
+                //         fontFamily: 'Nunito-Bold',
+                //         fontSize: 16,
+                //         color: Colors.grey,
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ),
             ),
 
@@ -164,19 +150,45 @@ class JenisPembayaran extends StatelessWidget {
               right: 30,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => DoctorsUmumScreen()),
-                  );
+                  if (selectedPaymentMethod != null) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DoctorsUmumScreen(
+                          poliklinik: poliklinik,
+                          metodePembayaran: selectedPaymentMethod!,
+                        ),
+                      ),
+                    );
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Peringatan'),
+                          content: Text(
+                              'Silakan pilih metode pembayaran terlebih dahulu.'),
+                          actions: [
+                            TextButton(
+                              child: Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
-                  shape: const StadiumBorder(),
+                  shape: StadiumBorder(),
                   elevation: 20,
                   shadowColor: Colors.black,
-                  minimumSize: const Size.fromHeight(45),
-                  backgroundColor: const Color(0xFF3E69FE),
+                  minimumSize: Size.fromHeight(45),
+                  backgroundColor: Color(0xFF3E69FE),
                 ),
-                child: const Text(
+                child: Text(
                   "Konfirmasi",
                   style: TextStyle(
                     fontSize: 20,

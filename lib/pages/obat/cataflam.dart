@@ -39,12 +39,15 @@ class _CataflamScreenState extends State<CataflamScreen> {
         ),
         centerTitle: true,
       ),
-      body: _buildBody(context),
+      body: _buildBody(
+          context), // Menggunakan _buildBody dengan parameter context
+      // bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
   Widget _buildBody(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    Size size = MediaQuery.of(context).size;
     return Stack(
       children: [
         const Positioned(
@@ -52,6 +55,7 @@ class _CataflamScreenState extends State<CataflamScreen> {
           left: 100,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            //Nama Obat
             children: [
               Text(
                 "Cataflam",
@@ -71,8 +75,8 @@ class _CataflamScreenState extends State<CataflamScreen> {
           left: 28,
           right: 28,
           child: Container(
-            padding:
-                const EdgeInsets.only(left: 20, top: 15, right: 20, bottom: 20),
+            height: 285,
+            padding: const EdgeInsets.only(left: 20, top: 5, right: 20),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16.0),
@@ -85,8 +89,9 @@ class _CataflamScreenState extends State<CataflamScreen> {
                 ),
               ],
             ),
+            //Field Deskripsi Obat
             child: const Text(
-              "Cataflam adalah obat yang bermanfaat untuk meredakan gejala nyeri dan radang sendi akibat rheumatoid arthritis, osteoarthritis, atau spondilitis ankilosa. Obat ini juga bisa digunakan untuk nyeri haid, migrain, atau nyeri setelah operasi.",
+              "Cataflam adalah obat yang bermanfaat untuk meredakan gejala nyeri dan radang sendi akibat rheumatoid arthritis, osteoarthritis, atau spondilitis ankilosa. Obat ini juga bisa digunakan untuk nyeri haid, migrain, atau nyeri setelah operasi. Cataflam mengandung bahan aktif diclofenac. Obat ini bekerja dengan cara menghambat enzim cyclooxygenase (COX) yang berfungsi memproduksi prostaglandin. ",
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontFamily: 'Nunito-Regular',
@@ -99,41 +104,43 @@ class _CataflamScreenState extends State<CataflamScreen> {
         ),
         Positioned(
           top: 300,
-          child: Column(
-            children: [
-              Container(
-                width: screenWidth - 60,
-                height: 60,
-                margin: const EdgeInsets.only(top: 150, left: 30),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 10, right: 250, top: 20),
-                  child: Center(
-                    child: Text(
-                      'Cair',
-                      style: TextStyle(
-                        fontFamily: 'Nunito-Regular',
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+          child: Container(
+            child: Column(
+              children: [
+                Container(
+                  width: screenWidth - 60,
+                  height: 70,
+                  margin: const EdgeInsets.only(top: 150, left: 30),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: const Offset(0, 3),
                       ),
-                      textAlign: TextAlign.justify,
+                    ],
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 10, right: 250, top: 20),
+                    child: Center(
+                      //Field Bentuk Obat
+                      child: Text(
+                        '	Tablet',
+                        style: TextStyle(
+                            fontFamily: 'Nunito-Regular',
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                        textAlign: TextAlign.justify,
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
         Positioned(
@@ -147,6 +154,7 @@ class _CataflamScreenState extends State<CataflamScreen> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Center(
+              //Judul Bentuk Obat
               child: Text(
                 'Bentuk Obat',
                 style: TextStyle(
@@ -161,41 +169,43 @@ class _CataflamScreenState extends State<CataflamScreen> {
         ),
         Positioned(
           top: 475,
-          child: Column(
-            children: [
-              Container(
-                width: screenWidth - 60,
-                height: 80,
-                margin: const EdgeInsets.only(top: 100, left: 31),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 20, right: 20, top: 20),
-                  child: Center(
-                    child: Text(
-                      'Cataflam dapat dikonsumsi sebelum atau sesudah makan, tetapi lebih baik sebelum makan. Untuk Cataflam Tablet, konsumsi obat dengan bantuan air putih. Jangan menghancurkan atau mengunyah tablet.',
-                      style: TextStyle(
-                        fontFamily: 'Nunito-Regular',
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+          child: Container(
+            child: Column(
+              children: [
+                Container(
+                  width: screenWidth - 60,
+                  height: 160,
+                  margin: const EdgeInsets.only(top: 100, left: 31),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: const Offset(0, 3),
                       ),
-                      textAlign: TextAlign.justify,
+                    ],
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+                    child: Center(
+                      //Field Aturan Pakai
+                      child: Text(
+                        ' Dosis awal 50–100 mg, tergantung pada derajat keparahan nyeri. Dosis harian umum adalah 50–150 mg, 2–3 kali sehari. Dosis maksimal 200 mg per hari.',
+                        style: TextStyle(
+                            fontFamily: 'Nunito-Regular',
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                        textAlign: TextAlign.justify,
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
         Positioned(
@@ -209,6 +219,7 @@ class _CataflamScreenState extends State<CataflamScreen> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Center(
+              //Judul Aturan Pakai
               child: Text(
                 'Aturan Pakai',
                 style: TextStyle(
