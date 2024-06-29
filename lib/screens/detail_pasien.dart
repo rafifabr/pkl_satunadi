@@ -4,7 +4,7 @@ import 'package:pkl_satunadi/screens/registerpb.dart';
 import 'package:pkl_satunadi/screens/registerpl.dart';
 
 class DetailPasienPage extends StatelessWidget {
-  const DetailPasienPage({Key? key});
+  const DetailPasienPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class DetailPasienPage extends StatelessWidget {
             fontSize: 20,
           ),
         ),
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(
@@ -60,7 +60,13 @@ class DetailPasienPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => RegisterPb(),
+                          builder: (context) => RegisterPb(
+                            nik: '',
+                            namaPasien: '',
+                            tanggalLahir: '',
+                            jenisKelamin: '',
+                            nomorTelepon: '',
+                          ),
                         ),
                       );
                     },
@@ -68,7 +74,7 @@ class DetailPasienPage extends StatelessWidget {
                       width: 200,
                       height: 200,
                       decoration: BoxDecoration(
-                        color: Colors.white, 
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: Column(
@@ -78,9 +84,8 @@ class DetailPasienPage extends StatelessWidget {
                             'assets/images/pasien_baru.png',
                             width: 100,
                             height: 100,
-                            // fit: BoxFit.cover,
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           const Text(
                             "Pasien Baru",
                             style: TextStyle(
@@ -99,7 +104,7 @@ class DetailPasienPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => RegisterPl(), 
+                          builder: (context) => RegisterPl(),
                         ),
                       );
                     },
@@ -117,9 +122,8 @@ class DetailPasienPage extends StatelessWidget {
                             'assets/images/pasien_lama.png',
                             width: 100,
                             height: 100,
-                            // fit: BoxFit.cover,
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           const Text(
                             "Pasien Lama",
                             style: TextStyle(
@@ -138,7 +142,7 @@ class DetailPasienPage extends StatelessWidget {
           ),
         ],
       ),
-      backgroundColor: Color(0xFF3B636E),
+      backgroundColor: const Color(0xFF3B636E),
     );
   }
 }

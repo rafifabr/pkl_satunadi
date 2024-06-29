@@ -1,18 +1,48 @@
-import 'package:pkl_satunadi/colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uuid/uuid.dart';
+import 'package:intl/intl.dart'; // Add this import
+import 'package:pkl_satunadi/colors.dart';
 import 'package:pkl_satunadi/screens/detail_rsvp.dart';
-import 'package:pkl_satunadi/screens/jenis_pembayaran.dart';
 import 'package:pkl_satunadi/screens/resume_rsvp.dart';
+import 'package:pkl_satunadi/services/firestore_reservasi_service.dart';
 
 class AppointmentCalendarScreen extends StatefulWidget {
   @override
-  _AppointmentCalendarScreenState createState() =>
-      _AppointmentCalendarScreenState();
+  _AppointmentCalendarScreenState createState() => _AppointmentCalendarScreenState();
 }
 
 class _AppointmentCalendarScreenState extends State<AppointmentCalendarScreen> {
   DateTime selectedDate = DateTime.now();
   int? _currentIndex;
+  String selectedPoliklinik = "";
+  String selectedMetodePembayaran = "";
+  final String namaDokter = "dr. John Doe"; // Define the doctor's name here
+
+  final FirestoreReservasiService _firestoreService = FirestoreReservasiService();
+  final String reservasiId = Uuid().v4(); // Generate a unique ID for the reservation
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchInitialData();
+  }
+
+  Future<void> _fetchInitialData() async {
+    // Fetch data from Firestore and set the state
+    var poliklinikData = await _firestoreService.getPoliklinikList();
+    var metodePembayaranData = await _firestoreService.getMetodePembayaranList();
+
+    setState(() {
+      if (poliklinikData.isNotEmpty) {
+        selectedPoliklinik = poliklinikData.first;
+      }
+      if (metodePembayaranData.isNotEmpty) {
+        selectedMetodePembayaran = metodePembayaranData.first;
+      }
+    });
+  }
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -29,21 +59,54 @@ class _AppointmentCalendarScreenState extends State<AppointmentCalendarScreen> {
     }
   }
 
-  void _confirmAppointment() {
-    // Add your logic for confirming the appointment
-    // You can use selectedDate variable here
-    print("Appointment Confirmed!");
-    print("Date: ${selectedDate.toLocal()}");
+  void _confirmAppointment() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      // User is signed in, proceed with Firestore operation
+      print("User is authenticated: ${user.uid}");
+      try {
+        // Format the selected date to include only the date part
+        String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
+        
+        await _firestoreService.tambahReservasi(
+          selectedPoliklinik,
+          selectedMetodePembayaran,
+          namaDokter,
+          formattedDate, // Use the formatted date here
+          "${_currentIndex! + 9}:00 ${_currentIndex! + 9 > 11 ? "PM" : "AM"}",
+          reservasiId: reservasiId, // Pass the pre-generated ID
+        );
+        print("Reservasi berhasil ditambahkan dengan ID: $reservasiId");
+        _navigateToResumeRsvpPage();
+      } catch (e) {
+        print("Error adding reservation: $e");
+      }
+    } else {
+      // User is not signed in, handle accordingly
+      print("User is not authenticated.");
+    }
   }
 
   void _navigateToResumeRsvpPage() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ResumeRsvpPage(),
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => ResumeRsvpPage(
+        reservasiId: reservasiId,
+        poliklinik: selectedPoliklinik,
+        metodePembayaran: selectedMetodePembayaran,
+        reservasi: {
+          'reservasiId': reservasiId,
+          'poliklinik': selectedPoliklinik,
+          'metodePembayaran': selectedMetodePembayaran,
+          'namaDokter': namaDokter,
+          'tanggal': DateFormat('yyyy-MM-dd').format(selectedDate),
+          'waktu': "${_currentIndex! + 9}:00 ${_currentIndex! + 9 > 11 ? "PM" : "AM"}",
+        },
       ),
-    );
-  }
+    ),
+  );
+}
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +118,7 @@ class _AppointmentCalendarScreenState extends State<AppointmentCalendarScreen> {
             flexibleSpace: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/doctor1.jpg"),
+                  image: AssetImage("assets/images/doctor4.jpg"),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.only(
@@ -94,12 +157,12 @@ class _AppointmentCalendarScreenState extends State<AppointmentCalendarScreen> {
                   child: Align(
                     alignment: Alignment.center,
                     child: Text(
-                      "Dr. John Doe",
+                      namaDokter, // Use the defined doctor's name
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.w500,
                         color: Colors.white,
-                        fontFamily: 'YourCustomFont', // Set your custom font
+                        fontFamily: 'YourCustomFont',
                       ),
                     ),
                   ),
@@ -132,7 +195,7 @@ class _AppointmentCalendarScreenState extends State<AppointmentCalendarScreen> {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  '${selectedDate.toLocal()}'.split(' ')[0],
+                  DateFormat('yyyy-MM-dd').format(selectedDate), // Display the formatted date
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -160,8 +223,7 @@ class _AppointmentCalendarScreenState extends State<AppointmentCalendarScreen> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color:
-                            _currentIndex == index ? Colors.blue : Colors.grey,
+                        color: _currentIndex == index ? Colors.blue : Colors.grey,
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       alignment: Alignment.center,
@@ -169,9 +231,7 @@ class _AppointmentCalendarScreenState extends State<AppointmentCalendarScreen> {
                         '${index + 9}:00 ${index + 9 > 11 ? "PM" : "AM"}',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: _currentIndex == index
-                              ? Colors.white
-                              : Colors.black,
+                          color: _currentIndex == index ? Colors.white : Colors.black,
                         ),
                       ),
                     ),
@@ -185,10 +245,7 @@ class _AppointmentCalendarScreenState extends State<AppointmentCalendarScreen> {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 40),
               child: ElevatedButton(
-                onPressed: () {
-                  _confirmAppointment();
-                  _navigateToResumeRsvpPage();
-                },
+                onPressed: _confirmAppointment,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: pColor,
                   shape: RoundedRectangleBorder(

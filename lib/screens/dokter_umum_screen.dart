@@ -1,9 +1,15 @@
-import 'package:pkl_satunadi/screens/detail_dokter.dart';
-import 'package:pkl_satunadi/screens/home_rsvp.dart';
 import 'package:flutter/material.dart';
-import 'package:pkl_satunadi/colors.dart';
+import 'package:pkl_satunadi/screens/detail_dokter.dart';
 
 class DoctorsUmumScreen extends StatelessWidget {
+  final String poliklinik;
+  final String metodePembayaran;
+
+  DoctorsUmumScreen({
+    required this.poliklinik,
+    required this.metodePembayaran,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,12 +31,23 @@ class DoctorsUmumScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
       ),
-      body: DoctorsSection(),
+      body: DoctorsSection(
+        poliklinik: poliklinik,
+        metodePembayaran: metodePembayaran,
+      ),
     );
   }
 }
 
 class DoctorsSection extends StatefulWidget {
+  final String poliklinik;
+  final String metodePembayaran;
+
+  DoctorsSection({
+    required this.poliklinik,
+    required this.metodePembayaran,
+  });
+
   @override
   State<DoctorsSection> createState() => _DoctorsSectionState();
 }
@@ -39,26 +56,35 @@ class _DoctorsSectionState extends State<DoctorsSection> {
   // List nama dokter dan data dokter
   List<Map<String, dynamic>> doctorsData = [
     {
-      'name': 'Dr. John Doe',
-      'image': 'assets/images/doctor1.jpg',
+      'name': 'dr. John Doe',
+      'image': 'assets/images/doctor4.jpg',
       'Dokter': 'Umum',
     },
     {
-      'name': 'Dr. Jane Smith',
+      'name': 'dr. Jane Smith',
       'image': 'assets/images/doctor2.jpg',
       'Dokter': 'Umum',
     },
     {
-      'name': 'Dr. Michael',
+      'name': 'dr. Michael',
       'image': 'assets/images/doctor3.jpg',
       'Dokter': 'Umum',
     },
     {
-      'name': 'Dr. Emily White',
-      'image': 'assets/images/doctor4.jpg',
+      'name': 'dr. Emily White',
+      'image': 'assets/images/doctor1.jpg',
       'Dokter': 'Umum',
     },
   ];
+
+  void _handleDoctorSelection(String name, String image, String dokter) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DoctorDetailPage1(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +127,7 @@ class _DoctorsSectionState extends State<DoctorsSection> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Dashboard(),
+                              builder: (context) => DoctorDetailPage1(),
                             ),
                           );
                         },
@@ -144,17 +170,11 @@ class _DoctorsSectionState extends State<DoctorsSection> {
                   right: 10,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (doctorsData[index]['name'] == 'Dr. John Doe') {
-                        // Navigasi khusus untuk Dr. John Doe ke appointment_screen.dart
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const DoctorDetailPage(),
-                          ),
-                        );
-                      } else {
-                        print('SELENGKAPNYA button tapped for ${doctorsData[index]['name']}');
-                      }
+                      _handleDoctorSelection(
+                        doctorsData[index]['name'],
+                        doctorsData[index]['image'],
+                        doctorsData[index]['Dokter'],
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
@@ -162,7 +182,8 @@ class _DoctorsSectionState extends State<DoctorsSection> {
                     child: Text(
                       'SELENGKAPNYA',
                       style: TextStyle(
-                        fontSize: 10, // Atur ukuran teks disini sesuai keinginan
+                        fontSize:
+                            10, // Atur ukuran teks disini sesuai keinginan
                         color: Colors.white,
                       ),
                     ),

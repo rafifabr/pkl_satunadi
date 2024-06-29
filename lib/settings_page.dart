@@ -4,7 +4,7 @@ import 'package:pkl_satunadi/card.dart';
 import 'package:pkl_satunadi/notification.dart';
 import 'package:pkl_satunadi/pages/home_page.dart';
 import 'package:pkl_satunadi/profile.dart';
-import 'package:pkl_satunadi/riwayat.dart';
+// import 'package:pkl_satunadi/riwayat.dart';
 import 'package:pkl_satunadi/welcome_screen.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -15,19 +15,16 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  int _currentIndex = 4; // Indeks halaman saat aplikasi dibuka
+  int _currentIndex = 4;
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      // Gunakan WillPopScope untuk menangani ketika tombol back ditekan
       onWillPop: () async {
-        // Beralih ke halaman dashboard (HomePage) saat tombol back ditekan
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => HomePage()),
         );
-        // Return false agar tidak tampil prompt konfirmasi keluar
         return false;
       },
       child: Scaffold(
@@ -48,7 +45,6 @@ class _SettingsPageState extends State<SettingsPage> {
               color: Colors.white,
             ),
             onPressed: () {
-              // Beralih ke halaman dashboard (HomePage) saat tombol back ditekan
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => HomePage()),
@@ -100,7 +96,8 @@ class _SettingsPageState extends State<SettingsPage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const MyProfileScreen()),
+                          MaterialPageRoute(
+                              builder: (context) => const MyProfileScreen()),
                         );
                       },
                     ),
@@ -112,10 +109,10 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // Aksi saat tombol "Keluar" ditekan
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const WelcomeScreen()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
@@ -141,7 +138,6 @@ class _SettingsPageState extends State<SettingsPage> {
           onTap: (index) {
             setState(() {
               _currentIndex = index;
-              // Handle navigasi berdasarkan index yang dipilih
               switch (index) {
                 case 0:
                   // Beranda
@@ -151,23 +147,28 @@ class _SettingsPageState extends State<SettingsPage> {
                   );
                   break;
                 case 1:
-                  // Riwayat
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RiwayatPage()));
-                  break;
+                // // Riwayat
+                // Navigator.pushReplacement(context,
+                //     MaterialPageRoute(builder: (context) => RiwayatPage()));
+                // break;
                 case 2:
                   // Kartu
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => KartuPage()));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => KartuPage()));
                   break;
                 case 3:
                   // Pengaturan
                   Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) => const NotificationPage()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const NotificationPage()));
                   break;
                 case 3:
                   // Pengaturan
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const SettingsPage()),
+                    MaterialPageRoute(
+                        builder: (context) => const SettingsPage()),
                   );
                   break;
               }

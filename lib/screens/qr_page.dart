@@ -2,21 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:pkl_satunadi/pages/home_page.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: QRPage(),
-    );
-  }
-}
-
 class QRPage extends StatelessWidget {
-  const QRPage({super.key});
+  final String reservasiId;
+  final String poliklinik;
+  final String metodePembayaran;
+
+  const QRPage({
+    Key? key,
+    required this.reservasiId,
+    required this.poliklinik,
+    required this.metodePembayaran,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +35,12 @@ class QRPage extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.white, 
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: QrImageView(
-                data: 'https://www.figma.com/file/jYZaMwfi8GPlqW2ggUOZRp/SATUNADI?type=design&node-id=473-3377&mode=design&t=iTPdoFyARXV66rBj-0',
+                data:
+                    'https://www.figma.com/file/jYZaMwfi8GPlqW2ggUOZRp/SATUNADI?type=design&node-id=473-3377&mode=design&t=iTPdoFyARXV66rBj-0', // Use actual data here
                 version: QrVersions.auto,
                 size: 300.0,
               ),

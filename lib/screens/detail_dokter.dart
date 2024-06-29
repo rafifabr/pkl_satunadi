@@ -7,13 +7,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: DoctorDetailPage(),
+      home: DoctorDetailPage1(),
     );
   }
 }
 
-class DoctorDetailPage extends StatelessWidget {
-  const DoctorDetailPage({super.key});
+class DoctorDetailPage1 extends StatelessWidget {
+  const DoctorDetailPage1({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class DoctorDetailPage extends StatelessWidget {
               left: 0,
               right: 0,
               child: Image.asset(
-                'assets/images/doctor1.jpg',
+                'assets/images/doctor4.jpg',
                 fit: BoxFit.cover,
               ),
             ),
@@ -85,7 +85,6 @@ class DoctorDetailPage extends StatelessWidget {
                         ),
                       ),
                     )
-
                   ],
                 ),
               ),
@@ -154,7 +153,6 @@ class DoctorDetailPage extends StatelessWidget {
                         ),
                       ),
                     )
-
                   ],
                 ),
               ),
@@ -236,28 +234,29 @@ class DoctorDetailPage extends StatelessWidget {
               left: 30,
               right: 30,
               child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AppointmentCalendarScreen()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                shape: const StadiumBorder(),
-                elevation: 20,
-                shadowColor: Colors.black,
-                minimumSize: const Size.fromHeight(45),
-                backgroundColor: const Color(0xFF3E69FE),
-              ),
-              child: const Text(
-                "Buat Janji Temu",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontFamily: 'Nunito-Bold',
-                  color: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AppointmentCalendarScreen()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: const StadiumBorder(),
+                  elevation: 20,
+                  shadowColor: Colors.black,
+                  minimumSize: const Size.fromHeight(45),
+                  backgroundColor: const Color(0xFF3E69FE),
+                ),
+                child: const Text(
+                  "Buat Janji Temu",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Nunito-Bold',
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
             ),
           ],
         ),

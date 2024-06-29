@@ -1,155 +1,103 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class EditProfileScreen extends StatelessWidget {
-  const EditProfileScreen({Key? key}) : super(key: key);
+  final Map<String, dynamic>? userData;
+
+  final TextEditingController _nikController = TextEditingController();
+  final TextEditingController _fullNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _genderController = TextEditingController();
+  final TextEditingController _nomorTeleponController = TextEditingController();
+
+  EditProfileScreen({Key? key, required this.userData}) : super(key: key) {
+    if (userData != null) {
+      _nikController.text = userData!['NIK'] ?? '';
+      _fullNameController.text = userData!['namaLengkap'] ?? '';
+      _emailController.text = userData!['email'] ?? '';
+      _genderController.text = userData!['gender'] ?? '';
+      _nomorTeleponController.text =
+          userData!['nomorTelepon']?.toString() ?? '';
+    }
+  }
+
+  Future<void> _saveChanges(BuildContext context) async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      try {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .update({
+          'namaLengkap': _fullNameController.text,
+          'nomorTelepon': _nomorTeleponController.text,
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Perubahan berhasil disimpan!')),
+        );
+        Navigator.pop(context);
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Terjadi kesalahan: $e')),
+        );
+        print('Error updating user data: $e');
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Pengguna tidak ditemukan.')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Edit Profil',
-          style: TextStyle(
-            fontFamily: 'Nunito-Bold',
-            color: Color.fromARGB(255, 255, 255, 255),
-            fontSize: 20,
-          ),
-        ),
-        backgroundColor: Color(0xFF3B636E),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        backgroundColor: const Color(0xFF3B636E),
+        title: const Text('Edit Profil'),
       ),
       body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: double.infinity,
-              height: 150,
-              decoration: const BoxDecoration(
-                color: Color(0xFF3B636E),
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(40),
-                  bottomLeft: Radius.circular(40),
-                ),
-              ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    maxRadius: 50.0,
-                    minRadius: 50.0,
-                    backgroundColor: Colors.white,
-                  ),
-                  SizedBox(width: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Aldi Barbara',
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Bold',
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 18,
-                        ),
-                      ),
-                      Text(
-                        'No Rekam Medis : PB001',
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Regular',
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            TextFormField(
+              controller: _nikController,
+              decoration: const InputDecoration(labelText: 'NIK'),
+              enabled: false,
             ),
-            ProfileDetailColumn(title: 'NIK', value: '3174055010020009'),
-            ProfileDetailColumn(title: 'Tanggal Lahir', value: '12/05/1992'),
-            ProfileDetailColumn(title: 'Jenis Kelamin', value: 'Laki-laki'),
-            ProfileDetailColumn(title: 'Email', value: 'aldiBarbara@gmail.com'),
-            ProfileDetailColumn(title: 'No HP', value: '085211522562'),
-            Icon(Icons.edit),
-            const SizedBox(height: 10), // Added space before the button
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Navigate to the edit profile page
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => EditProfileScreen(),
-                  //   ),
-                  // );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF3E69FE), // Set the background color of the button
-                ),
-                child: const Text(
-                  'Simpan',
-                  style: TextStyle(
-                    fontFamily: 'Nunito-Bold',
-                    fontSize: 15,
-                    color: Colors.white, // Set the text color of the button
-                  ),
-                ),
+            TextFormField(
+              controller: _fullNameController,
+              decoration: const InputDecoration(labelText: 'Nama Lengkap'),
+            ),
+            TextFormField(
+              controller: _emailController,
+              decoration: const InputDecoration(labelText: 'Email'),
+              enabled: false,
+            ),
+            TextFormField(
+              controller: _genderController,
+              decoration: const InputDecoration(labelText: 'Jenis Kelamin'),
+              enabled: false,
+            ),
+            TextFormField(
+              controller: _nomorTeleponController,
+              decoration: const InputDecoration(labelText: 'Nomor HP'),
+            ),
+            const SizedBox(height: 20.0),
+            ElevatedButton(
+              onPressed: () async {
+                await _saveChanges(context);
+              },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.blue,
               ),
+              child: const Text('Simpan'),
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class ProfileDetailColumn extends StatelessWidget {
-  const ProfileDetailColumn(
-      {Key? key, required this.title, required this.value})
-      : super(key: key);
-  final String title;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontFamily: 'Nunito-Bold',
-              color: Colors.black,
-              fontSize: 15,
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            value,
-            style: const TextStyle(
-              fontFamily: 'Nunito-Regular',
-              color: Colors.black,
-              fontSize: 18,
-            ),
-          ),
-          const SizedBox(height: 10),
-          const Divider(
-            thickness: 1.0,
-          ),
-        ],
       ),
     );
   }

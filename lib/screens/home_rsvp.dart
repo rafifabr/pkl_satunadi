@@ -1,11 +1,16 @@
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:pkl_satunadi/screens/dokter_umum_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pkl_satunadi/colors.dart';
 import 'package:pkl_satunadi/screens/jenis_pembayaran.dart';
+import 'package:pkl_satunadi/services/firestore_reservasi_service.dart';
 
 class Dashboard extends StatelessWidget {
-  List catNames = [
+  Dashboard({Key? key}) : super(key: key);
+
+  final FirestoreReservasiService _firestoreService =
+      FirestoreReservasiService();
+
+  List<String> catNames = [
     "Umum",
     "Mata",
     "THT",
@@ -41,7 +46,7 @@ class Dashboard extends StatelessWidget {
     Icon(MdiIcons.medication, color: tColor, size: 30),
   ];
 
-  Dashboard({super.key});
+  DateTime? selectedDate; // Declare selectedDate here
 
   @override
   Widget build(BuildContext context) {
@@ -72,16 +77,16 @@ class Dashboard extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 30),
+                  padding: const EdgeInsets.only(top: 30),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height: 70),
+                            const SizedBox(height: 70),
                             const Text(
                               "Mari Temukan Dokter Untuk Anda",
                               style: TextStyle(
@@ -91,14 +96,15 @@ class Dashboard extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.only(top: 15, bottom: 20),
+                              margin:
+                                  const EdgeInsets.only(top: 15, bottom: 20),
                               width: MediaQuery.of(context).size.width,
                               height: 55,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 color: wColor,
                                 borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
+                                boxShadow: const [
                                   BoxShadow(
                                     color: sdColor,
                                     blurRadius: 6,
@@ -113,7 +119,7 @@ class Dashboard extends StatelessWidget {
                                   hintStyle: TextStyle(
                                     color: Colors.black.withOpacity(0.5),
                                   ),
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                     Icons.search,
                                     size: 25,
                                   ),
@@ -123,7 +129,7 @@ class Dashboard extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(height: 55),
+                      const SizedBox(height: 55),
                       const Padding(
                         padding: EdgeInsets.only(left: 15),
                         child: Text(
@@ -139,7 +145,8 @@ class Dashboard extends StatelessWidget {
                         height: MediaQuery.of(context).size.height / 2,
                         child: GridView.builder(
                           shrinkWrap: true,
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
                             crossAxisSpacing: 10.0,
                             mainAxisSpacing: 10.0,
@@ -147,16 +154,20 @@ class Dashboard extends StatelessWidget {
                           itemCount: catNames.length,
                           itemBuilder: (context, index) {
                             return GestureDetector(
-                              onTap: () {
-                                switch (catNames[index]) {
-                                  case "Umum":
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => JenisPembayaran(),
+                              onTap: () async {
+                                final selectedPoliklinik = catNames[index];
+                                selectedDate = DateTime.now();
+
+                                if (selectedPoliklinik == "Umum") {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => JenisPembayaran(
+                                        poliklinik: selectedPoliklinik,
+                                        selectedDate: selectedDate!,
                                       ),
-                                    );
-                                    break;
+                                    ),
+                                  );
                                 }
                               },
                               child: Container(
@@ -164,16 +175,16 @@ class Dashboard extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     Container(
-                                      margin: EdgeInsets.symmetric(
+                                      margin: const EdgeInsets.symmetric(
                                         vertical: 5,
                                         horizontal: 15,
                                       ),
                                       height: 60,
                                       width: 60,
                                       decoration: BoxDecoration(
-                                        color: Color(0xFFF2F8FF),
+                                        color: const Color(0xFFF2F8FF),
                                         shape: BoxShape.rectangle,
-                                        boxShadow: [
+                                        boxShadow: const [
                                           BoxShadow(
                                             color: sdColor,
                                             blurRadius: 4,
@@ -185,7 +196,7 @@ class Dashboard extends StatelessWidget {
                                         child: catIcons[index],
                                       ),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
                                       catNames[index],
                                       style: TextStyle(
@@ -201,7 +212,7 @@ class Dashboard extends StatelessWidget {
                           },
                         ),
                       ),
-                      SizedBox(height: 16),  // Added SizedBox to provide space between GridView and the next content
+                      const SizedBox(height: 16),
                       // Additional content below GridView goes here
                     ],
                   ),
