@@ -46,7 +46,9 @@ class Dashboard extends StatelessWidget {
     Icon(MdiIcons.medication, color: tColor, size: 30),
   ];
 
-  DateTime? selectedDate; // Declare selectedDate here
+  DateTime? selectedDate;
+  TextEditingController searchController = TextEditingController();
+  List<String> filteredCatNames = [];
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +90,7 @@ class Dashboard extends StatelessWidget {
                           children: [
                             const SizedBox(height: 70),
                             const Text(
-                              "Mari Temukan Dokter Untuk Anda",
+                              "Silahkan pilih poliklinik",
                               style: TextStyle(
                                 fontFamily: 'Nunito-Bold',
                                 color: Colors.white,
@@ -113,9 +115,17 @@ class Dashboard extends StatelessWidget {
                                 ],
                               ),
                               child: TextFormField(
+                                controller: searchController,
+                                onChanged: (value) {
+                                  filteredCatNames = catNames
+                                      .where((name) => name
+                                          .toLowerCase()
+                                          .contains(value.toLowerCase()))
+                                      .toList();
+                                },
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: "Cari Dokter...",
+                                  hintText: "Cari Poli...",
                                   hintStyle: TextStyle(
                                     color: Colors.black.withOpacity(0.5),
                                   ),
@@ -151,24 +161,27 @@ class Dashboard extends StatelessWidget {
                             crossAxisSpacing: 10.0,
                             mainAxisSpacing: 10.0,
                           ),
-                          itemCount: catNames.length,
+                          itemCount: searchController.text.isEmpty
+                              ? catNames.length
+                              : filteredCatNames.length,
                           itemBuilder: (context, index) {
+                            String name = searchController.text.isEmpty
+                                ? catNames[index]
+                                : filteredCatNames[index];
                             return GestureDetector(
                               onTap: () async {
-                                final selectedPoliklinik = catNames[index];
+                                final selectedPoliklinik = name;
                                 selectedDate = DateTime.now();
 
-                                if (selectedPoliklinik == "Umum") {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => JenisPembayaran(
-                                        poliklinik: selectedPoliklinik,
-                                        selectedDate: selectedDate!,
-                                      ),
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => JenisPembayaran(
+                                      poliklinik: selectedPoliklinik,
+                                      selectedDate: selectedDate!,
                                     ),
-                                  );
-                                }
+                                  ),
+                                );
                               },
                               child: Container(
                                 height: 100,
@@ -193,12 +206,12 @@ class Dashboard extends StatelessWidget {
                                         ],
                                       ),
                                       child: Center(
-                                        child: catIcons[index],
+                                        child: catIcons[catNames.indexOf(name)],
                                       ),
                                     ),
                                     const SizedBox(height: 10),
                                     Text(
-                                      catNames[index],
+                                      name,
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,

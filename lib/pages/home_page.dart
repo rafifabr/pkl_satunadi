@@ -249,7 +249,7 @@ class SelamatDatang extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Selamat Datang,\nAldi Barbara",
+                          "Hallo,",
                           style:
                               Theme.of(context).textTheme.titleLarge!.copyWith(
                                     fontWeight: FontWeight.w700,
@@ -263,7 +263,7 @@ class SelamatDatang extends StatelessWidget {
                               Theme.of(context).textTheme.titleLarge!.copyWith(
                                     fontWeight: FontWeight.w500,
                                     letterSpacing: 1,
-                                    fontSize: 13.0,
+                                    fontSize: 15.0,
                                     height: 1.5,
                                   ),
                         ),

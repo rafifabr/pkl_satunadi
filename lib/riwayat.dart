@@ -111,7 +111,9 @@ class _RiwayatPageState extends State<RiwayatPage>
                 Tab(text: 'Selesai'),
                 Tab(text: 'Batal'),
               ],
-              indicatorColor: const Color(0xFF3B636E),
+              indicatorColor: Colors.white,
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.white70,
             ),
           ),
           Expanded(

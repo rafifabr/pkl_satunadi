@@ -13,6 +13,8 @@ class NotificationPage extends StatefulWidget {
 
 class _NotificationPageState extends State<NotificationPage> {
   int _currentIndex = 3; // Indeks halaman saat aplikasi dibuka
+  int currentQueueNumber =
+      10; // Nomor antrian saat ini, bisa diubah sesuai kebutuhan
 
   @override
   Widget build(BuildContext context) {
@@ -65,16 +67,154 @@ class _NotificationPageState extends State<NotificationPage> {
                   color: Colors.blueGrey.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.queue),
+                    Row(
+                      children: [
+                        Image.asset(
+                          'assets/images/icon-1.png',
+                          width: 25,
+                          height: 25,
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          'SATUNADI',
+                          style: TextStyle(
+                            fontFamily: 'Nunito-Regular',
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
                     Text(
-                      'Nomor Antrian Saat Ini: 5',
+                      'Hai! Kami ingin mengingatkan Anda tentang janji temu Anda hari ini. Pastikan Anda datang tepat waktu ya, sampai jumpa!',
                       style: TextStyle(
-                        fontFamily: 'Nunito-Regular',
+                        fontFamily: 'Nunito-Bold',
                         color: Colors.black,
-                        fontSize: 18,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(
+                          'assets/images/icon-1.png',
+                          width: 25,
+                          height: 25,
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          'SATUNADI',
+                          style: TextStyle(
+                            fontFamily: 'Nunito-Regular',
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Jangan lupa untuk hadir pada janji temu 1 hari lagi!',
+                      style: TextStyle(
+                        fontFamily: 'Nunito-Bold',
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(
+                          'assets/images/icon-1.png',
+                          width: 25,
+                          height: 25,
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          'SATUNADI',
+                          style: TextStyle(
+                            fontFamily: 'Nunito-Regular',
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Jangan lupa untuk hadir pada janji temu 2 hari lagi!',
+                      style: TextStyle(
+                        fontFamily: 'Nunito-Bold',
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(
+                          'assets/images/icon-1.png',
+                          width: 25,
+                          height: 25,
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          'SATUNADI',
+                          style: TextStyle(
+                            fontFamily: 'Nunito-Regular',
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Selamat! Reservasi janji temu anda berhasil dibuat.',
+                      style: TextStyle(
+                        fontFamily: 'Nunito-Bold',
+                        color: Colors.black,
+                        fontSize: 16,
                       ),
                     ),
                   ],
