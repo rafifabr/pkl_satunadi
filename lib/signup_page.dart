@@ -60,7 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
     if (!isNIKValid(_nikController.text.trim())) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('NIK harus terdiri dari 13 angka.'),
+          content: Text('NIK harus terdiri dari 16 angka.'),
           backgroundColor: Colors.red,
         ),
       );

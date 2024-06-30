@@ -12,7 +12,7 @@ class RekamMedisPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black,),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.push(
               context,
@@ -68,7 +68,7 @@ class RekamMedisPage extends StatelessWidget {
                       Text(
                         'Tanggal Lahir',
                         style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
+                          fontFamily: 'Nunito-Regular',
                           fontSize: 15.0,
                         ),
                       ),
@@ -76,7 +76,7 @@ class RekamMedisPage extends StatelessWidget {
                       Text(
                         ': 19 - 02 - 1990',
                         style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
+                          fontFamily: 'Nunito-Regular',
                           fontSize: 15.0,
                         ),
                       ),
@@ -88,7 +88,7 @@ class RekamMedisPage extends StatelessWidget {
                       Text(
                         'Usia',
                         style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
+                          fontFamily: 'Nunito-Regular',
                           fontSize: 15.0,
                         ),
                       ),
@@ -96,47 +96,7 @@ class RekamMedisPage extends StatelessWidget {
                       Text(
                         ': 31 tahun 2 bulan',
                         style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 8.0),
-                  Row(
-                    children: [
-                      Text(
-                        'Alamat',
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
-                          fontSize: 15.0,
-                        ),
-                      ),
-                      SizedBox(width: 50.0),
-                      Text(
-                        ': Jl. Letjen Suprapto XVIII no. 32',
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 8.0),
-                  Row(
-                    children: [
-                      Text(
-                        'Pekerjaan',
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
-                          fontSize: 15.0,
-                        ),
-                      ),
-                      SizedBox(width: 30.0),
-                      Text(
-                        ': Karyawan swasta',
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
+                          fontFamily: 'Nunito-Regular',
                           fontSize: 15.0,
                         ),
                       ),
@@ -148,11 +108,11 @@ class RekamMedisPage extends StatelessWidget {
             SizedBox(height: 16.0),
             Text(
               'Riwayat Kunjungan',
-              style: 
-                TextStyle(
-                  fontFamily: 'Nunito-Reguler',
-                  fontSize: 18.0, 
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontFamily: 'Nunito-Bold',
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             SizedBox(height: 8.0),
             _buildVisitCard(context, '13 April 2020', 'Infeksi Lambung'),
@@ -179,41 +139,42 @@ class RekamMedisPage extends StatelessWidget {
                 fontFamily: 'Nunito-Bold',
               ),
             ),
-          InkWell(
-            onTap: () {
-              // Navigasi ke halaman berikutnya berdasarkan diagnosis
-              switch (diagnosis.toLowerCase()) {
-                case 'infeksi lambung':
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => InfeksiLambungPage()),
-                  );
-                  break;
-                case 'vertigo':
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => VertigoPage()),
-                  );
-                  break;
-                case 'radang tenggorokan':
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => RadangTenggorokanPage()),
-                  );
-                  break;
-              }
-            },
-            child: Text(
-              'Lihat Detail',
-              style: TextStyle(
-                fontFamily: 'Nunito-Bold',
-                fontSize: 12.0,
-                color: Colors.blue,
+            InkWell(
+              onTap: () {
+                switch (diagnosis.toLowerCase()) {
+                  case 'infeksi lambung':
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => InfeksiLambungPage()),
+                    );
+                    break;
+                  case 'vertigo':
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => VertigoPage()),
+                    );
+                    break;
+                  case 'radang tenggorokan':
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RadangTenggorokanPage()),
+                    );
+                    break;
+                }
+              },
+              child: Text(
+                'Lihat Detail',
+                style: TextStyle(
+                  fontFamily: 'Nunito-Bold',
+                  fontSize: 12.0,
+                  color: Colors.blue,
+                ),
               ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
         subtitle: Text(
           'Diagnosis: $diagnosis',
           style: TextStyle(
@@ -278,7 +239,7 @@ class KunjunganPasienPage extends StatelessWidget {
                       Text(
                         'Tanggal Lahir',
                         style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
+                          fontFamily: 'Nunito-Regular',
                           fontSize: 15.0,
                         ),
                       ),
@@ -286,7 +247,7 @@ class KunjunganPasienPage extends StatelessWidget {
                       Text(
                         ': 19 - 02 - 1990',
                         style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
+                          fontFamily: 'Nunito-Regular',
                           fontSize: 15.0,
                         ),
                       ),
@@ -298,7 +259,7 @@ class KunjunganPasienPage extends StatelessWidget {
                       Text(
                         'Usia',
                         style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
+                          fontFamily: 'Nunito-Regular',
                           fontSize: 15.0,
                         ),
                       ),
@@ -306,47 +267,7 @@ class KunjunganPasienPage extends StatelessWidget {
                       Text(
                         ': 31 tahun 2 bulan',
                         style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 8.0),
-                  Row(
-                    children: [
-                      Text(
-                        'Alamat',
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
-                          fontSize: 15.0,
-                        ),
-                      ),
-                      SizedBox(width: 50.0),
-                      Text(
-                        ': Jl. Letjen Suprapto XVIII no. 32',
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 8.0),
-                  Row(
-                    children: [
-                      Text(
-                        'Pekerjaan',
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
-                          fontSize: 15.0,
-                        ),
-                      ),
-                      SizedBox(width: 30.0),
-                      Text(
-                        ': Karyawan swasta',
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
+                          fontFamily: 'Nunito-Regular',
                           fontSize: 15.0,
                         ),
                       ),
@@ -356,7 +277,7 @@ class KunjunganPasienPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16.0),
-          ]
+          ],
         ),
       ),
     );

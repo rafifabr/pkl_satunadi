@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class RadangTenggorokanPage extends StatelessWidget {
   const RadangTenggorokanPage({Key? key}) : super(key: key);
 
-@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Kunjungan Pasien',
           style: TextStyle(
             fontFamily: 'Nunito-Bold',
@@ -15,25 +15,25 @@ class RadangTenggorokanPage extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Color(0xFF61B297),
+                color: const Color(0xFF61B297),
                 borderRadius: BorderRadius.circular(8.0),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.3),
                     spreadRadius: 1,
                     blurRadius: 5,
-                    offset: Offset(0, 3), // changes position of shadow
+                    offset: const Offset(0, 3), // changes position of shadow
                   ),
                 ],
               ),
-              padding: EdgeInsets.all(16.0),
-              child: Column(
+              padding: const EdgeInsets.all(16.0),
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
@@ -97,51 +97,11 @@ class RadangTenggorokanPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 8.0),
-                  Row(
-                    children: [
-                      Text(
-                        'Alamat',
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
-                          fontSize: 15.0,
-                        ),
-                      ),
-                      SizedBox(width: 50.0),
-                      Text(
-                        ': Jl. Letjen Suprapto XVIII no. 32',
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 8.0),
-                  Row(
-                    children: [
-                      Text(
-                        'Pekerjaan',
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
-                          fontSize: 15.0,
-                        ),
-                      ),
-                      SizedBox(width: 30.0),
-                      Text(
-                        ': Karyawan swasta',
-                        style: TextStyle(
-                          fontFamily: 'Nunito-Reguler',
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
-            SizedBox(height: 16.0),
-            Text(
+            const SizedBox(height: 16.0),
+            const Text(
               'Pemeriksaan Pasien',
               style: TextStyle(
                 fontFamily: 'Nunito-Reguler',
@@ -149,22 +109,22 @@ class RadangTenggorokanPage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Container(
               decoration: BoxDecoration(
-                color: Color(0xFF61B297),
+                color: const Color(0xFF61B297),
                 borderRadius: BorderRadius.circular(8.0),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.3),
                     spreadRadius: 1,
                     blurRadius: 5,
-                    offset: Offset(0, 3), // changes position of shadow
+                    offset: const Offset(0, 3), // changes position of shadow
                   ),
                 ],
               ),
-              padding: EdgeInsets.all(16.0),
-              child: Column(
+              padding: const EdgeInsets.all(16.0),
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
@@ -231,7 +191,7 @@ class RadangTenggorokanPage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             SizedBox(
               height: 140,
               child: ListView(
@@ -241,26 +201,27 @@ class RadangTenggorokanPage extends StatelessWidget {
                   Container(
                     width: 182,
                     decoration: BoxDecoration(
-                      color: Colors.white, 
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.3),
                           spreadRadius: 1,
                           blurRadius: 5,
-                          offset: Offset(0, 3), // changes position of shadow
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
                         ),
                       ],
                     ),
-                    child: Stack(
+                    child: const Stack(
                       children: [
                         Positioned(
                           top: 5,
                           left: 7,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
-                              'Golongan \nDarah', 
+                              'Golongan \nDarah',
                               style: TextStyle(
                                 fontFamily: 'Nunito-Bold',
                                 fontSize: 20.0,
@@ -272,9 +233,9 @@ class RadangTenggorokanPage extends StatelessWidget {
                           bottom: 5,
                           left: 7,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
-                              'B', 
+                              'B',
                               style: TextStyle(
                                 fontFamily: 'Nunito-Reguler',
                                 fontSize: 30.0,
@@ -285,30 +246,31 @@ class RadangTenggorokanPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   Container(
                     width: 180,
                     decoration: BoxDecoration(
-                      color: Colors.white, 
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.3),
                           spreadRadius: 1,
                           blurRadius: 5,
-                          offset: Offset(0, 3), // changes position of shadow
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
                         ),
                       ],
                     ),
-                    child: Stack(
+                    child: const Stack(
                       children: [
                         Positioned(
                           top: 5,
                           left: 7,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
-                              'Tinggi \nBadan', 
+                              'Tinggi \nBadan',
                               style: TextStyle(
                                 fontFamily: 'Nunito-Bold',
                                 fontSize: 20.0,
@@ -320,9 +282,9 @@ class RadangTenggorokanPage extends StatelessWidget {
                           bottom: 5,
                           left: 7,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
-                              '190', 
+                              '190',
                               style: TextStyle(
                                 fontFamily: 'Nunito-Reguler',
                                 fontSize: 30.0,
@@ -336,7 +298,7 @@ class RadangTenggorokanPage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             SizedBox(
               height: 140,
               child: ListView(
@@ -346,26 +308,27 @@ class RadangTenggorokanPage extends StatelessWidget {
                   Container(
                     width: 182,
                     decoration: BoxDecoration(
-                      color: Colors.white, 
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.3),
                           spreadRadius: 1,
                           blurRadius: 5,
-                          offset: Offset(0, 3), // changes position of shadow
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
                         ),
                       ],
                     ),
-                    child: Stack(
+                    child: const Stack(
                       children: [
                         Positioned(
                           top: 5,
                           left: 7,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
-                              'Indeks Massa \nTubuh', 
+                              'Indeks Massa \nTubuh',
                               style: TextStyle(
                                 fontFamily: 'Nunito-Bold',
                                 fontSize: 20.0,
@@ -377,9 +340,9 @@ class RadangTenggorokanPage extends StatelessWidget {
                           bottom: 5,
                           left: 7,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
-                              '18.5', 
+                              '18.5',
                               style: TextStyle(
                                 fontFamily: 'Nunito-Reguler',
                                 fontSize: 30.0,
@@ -390,30 +353,31 @@ class RadangTenggorokanPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   Container(
                     width: 180,
                     decoration: BoxDecoration(
-                      color: Colors.white, 
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.3),
                           spreadRadius: 1,
                           blurRadius: 5,
-                          offset: Offset(0, 3), // changes position of shadow
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
                         ),
                       ],
                     ),
-                    child: Stack(
+                    child: const Stack(
                       children: [
                         Positioned(
                           top: 5,
                           left: 7,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
-                              'Berat \nBadan', 
+                              'Berat \nBadan',
                               style: TextStyle(
                                 fontFamily: 'Nunito-Bold',
                                 fontSize: 20.0,
@@ -425,9 +389,9 @@ class RadangTenggorokanPage extends StatelessWidget {
                           bottom: 5,
                           left: 7,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
-                              '90', 
+                              '90',
                               style: TextStyle(
                                 fontFamily: 'Nunito-Reguler',
                                 fontSize: 30.0,
@@ -441,7 +405,7 @@ class RadangTenggorokanPage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             SizedBox(
               height: 140,
               child: ListView(
@@ -451,26 +415,27 @@ class RadangTenggorokanPage extends StatelessWidget {
                   Container(
                     width: 182,
                     decoration: BoxDecoration(
-                      color: Colors.white, 
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.3),
                           spreadRadius: 1,
                           blurRadius: 5,
-                          offset: Offset(0, 3), // changes position of shadow
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
                         ),
                       ],
                     ),
-                    child: Stack(
+                    child: const Stack(
                       children: [
                         Positioned(
                           top: 5,
                           left: 7,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
-                              'Tekanan \nDarah', 
+                              'Tekanan \nDarah',
                               style: TextStyle(
                                 fontFamily: 'Nunito-Bold',
                                 fontSize: 20.0,
@@ -482,9 +447,9 @@ class RadangTenggorokanPage extends StatelessWidget {
                           bottom: 5,
                           left: 7,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
-                              '90/60', 
+                              '90/60',
                               style: TextStyle(
                                 fontFamily: 'Nunito-Reguler',
                                 fontSize: 30.0,
@@ -495,30 +460,31 @@ class RadangTenggorokanPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   Container(
                     width: 180,
                     decoration: BoxDecoration(
-                      color: Colors.white, 
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.3),
                           spreadRadius: 1,
                           blurRadius: 5,
-                          offset: Offset(0, 3), // changes position of shadow
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
                         ),
                       ],
                     ),
-                    child: Stack(
+                    child: const Stack(
                       children: [
                         Positioned(
                           top: 5,
                           left: 7,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
-                              'Detak \nJantung', 
+                              'Detak \nJantung',
                               style: TextStyle(
                                 fontFamily: 'Nunito-Bold',
                                 fontSize: 20.0,
@@ -530,9 +496,9 @@ class RadangTenggorokanPage extends StatelessWidget {
                           bottom: 5,
                           left: 7,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
-                              '105 bpm', 
+                              '105 bpm',
                               style: TextStyle(
                                 fontFamily: 'Nunito-Reguler',
                                 fontSize: 30.0,
